@@ -91,7 +91,7 @@
 
 
 // So scope is determine at the compile time and should not generally affected by runtime conditions.So 
-// Howevenr in non stric mode there are technicallly still two ways to cheat this CSSPageRule,modifying the program scope during runtime
+// Howevenr in non stric mode there are technicallly still two ways to cheat this,modifying the program scope during runtime
 // Run in not strict mode
 // 1. eval(..)
 // function badIdea() {
@@ -128,7 +128,7 @@
 
 // Chapter3
 // Shadowing the variable
-// It is possible to access a global variable from the scope where that ariable has been shadowd but not through a typica; lexical identifiers reference
+// It is possible to access a global variable from the scope where that variable has been shadowd but not through a typica; lexical identifiers reference
 
 // let one = 'HImashu';
 // const two = 'Tamrakar';
