@@ -49,8 +49,8 @@
 
 // Compilation in three basic steps 
 // 1. Tokenizing/Lexing
-// Breaking of string of charectors in to meaningful chunks called DOMSettableTokenList. 
-// var a = 2; =? var, a, =, 2, ;
+// Breaking of string of charectors in to meaningful chunks called tokens. 
+// var a = 2; => var, a, =, 2, ;
 
 // 2. Parsing
 // taking stream (array) of tokens and turning it into a tree of nested elements, whick collectively represent grammatical structure of programm.
@@ -90,8 +90,8 @@
 // saySomething();
 
 
-// So scope is determine at the compile time and should not generally affected by runtime conditions.So 
-// Howevenr in non stric mode there are technicallly still two ways to cheat this,modifying the program scope during runtime
+// So scope is determine at the compile time and should not generally affected by runtime conditions.
+// However in non stric mode there are technicallly still two ways to cheat this,modifying the program scope during runtime
 // Run in not strict mode
 // 1. eval(..)
 // function badIdea() {
@@ -174,7 +174,7 @@
 // shadow()
 
 // var a = 10; var a = 20; console.log(a); // works: not crossing
-// let a = 10; let a = 20; console.log(a); // not works: wierd
+// let a = 10; let a = 20; console.log(a); // not works: wierd, Identifier 'a' has already been declared
 
 
 // Function Declaration, Function Expression, Arrow Function
@@ -241,7 +241,7 @@
 //     console.log('Hi there');
 // }
 
-// function hoisting and var-flavared variable hoisting attach their name iidentifier to the nearest enclosing
+// function hoisting and var-flavared variable hoisting attach their name identifier to the nearest enclosing
 // function scope(or if Non the global scope), not a block scope
 // let and const still hoist(but unavailable to use due to TDZ). But there two declaration forms attach t  their closing
 // block not function as var and function declation
@@ -353,7 +353,7 @@
 
 // Not all the curly bracket creates a scope, It become a new scope if it contains block scope declaration like let and const.
 
-// Object literals are now scope 
+// Object literals are not scope 
 // class {}'s are not block or scope
 //{..} on switch statement around the set of case clause does not block or scope
 // function getNextMonthStart(dateStr) {
@@ -448,7 +448,7 @@
 
 // Chapter 7
 // Closure: Function remember the variables of outer scope or in its birth place even though function has been finished.
-// Even though closure is loxical scope but it is runtime charecteristics
+// Even though closure is lexical scope but it is runtime charecteristics
 // Closure is live link not a snapshot
 // Closure is on variavle never on value
 
@@ -491,7 +491,7 @@
 // onSubmit();
 
 
-// Closure bind scope nto variable.. eval gotcha
+// Closure bind scope not variable.. eval gotcha
 // function getStudentInfo(id, name, grade) {
 
 //     return function getInfo(whichValue) {
@@ -538,7 +538,7 @@
 // Modern ES Module ESM 
 // ESM file by default assumed as strict mode as compare to CommonJs Module
 // Rest as CommanJs module has singleton, file based, private bydefault, and export syntax.
-//  but export here should be top level of the scope 
+// but export here should be top level of the scope 
 
 // if export is default then import can be without {}
 // import {Student as stud} ... 
@@ -552,7 +552,7 @@
 
 // Function's parameter also create scope
 // Not in the case of notmal parameter
-// but Non simple parameter lke defualt value, like that
+// but Non simple parameter like default value, like that
 
 // function studentName(studentId) {} // wont create scope
 // function studentName(studentId = 0) {} // Create scope for parameter as well

@@ -1,11 +1,11 @@
 'use strict';
 
 
-// Group of words, numbers, openrations thar perform some task are statement.
+// Group of words, numbers, openrations that perform some task are statement.
 // Statement is group of expression
-// Expression that produce some value
+// Expression that produces some value
 
-// Coercion: Converting one type to another called Coercion
+// Coercion: Converting one type value to another called Coercion
 
 // Loose comparision make coercion that is why it is slow compare to ===
 // "99.99" == 99.99 then he will first convert "99.99" to 99.99 then compare
@@ -60,7 +60,7 @@ typeof foo.fisrtName // 'string'
 // truthy: Rest
 
 
-// == loose equality because it coerce value if need : Slow
+// == loose equality because it coerce value if need
 // === strict equality because it does not coerce
 
 // Array coerced by joining all the value with (,)
@@ -87,15 +87,14 @@ b3 < c3 // true both are string helce comparing lexicographically
 
 /** -------------- */
 
-// If we are trying to se a variable that hasnot been decleared, you will end up creating a variable in the top level 
+// If we are trying to access a variable that hasnot been decleared, you will end up creating a variable in the top level 
 // globale scope or getting an error depending upon 'strict mode'
 
 
 // a4 = 19; // in 'use strict' it is an error otherwise it will create property in window
 
 
-// 'strict mode tighten the rules for cetain behaviour these are to keep code much safer and lee
-// error prone
+// 'strict mode tighten the rules for cetain behaviour these are to keep code much safer and less error prone
 // 1. Disallowing auto global variable creation like above(a4)
 
 
@@ -114,5 +113,5 @@ foo()
 // pollyfill means producing a piece of code(newer feature) that is equivalent to the behaviour in older browser
 
 // There is no way to pollyfill new syntax that has been added to the language. The new syntac will throuw an error in the
-// old JS engine as unrecognized/invalid. So the option is use a tool that conver your newer code equivalent to older code
+// old JS engine as unrecognized/invalid. So the option is use a tool that convert your newer code equivalent to older code
 
