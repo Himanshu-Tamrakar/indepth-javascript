@@ -66,7 +66,7 @@
 // 2. This is not its scope 
 // function foo() {
 //     var a = 2;
-//     this.bar(foo); // strict mode bar is not accessible and in no strict mode  this.a is not accessible
+//     this.bar(foo); // strict mode bar is not accessible and in non strict mode this.a is not accessible
 // }
 
 // function bar() {
@@ -188,7 +188,7 @@
 //     a: 2
 // }
 // var bar = function () {
-//     return foo.apply(obj, arguments);
+//     return foo.apply(obj, arguments); 
 // }
 // var b = bar(10, 8);
 // console.log(b);
@@ -247,13 +247,13 @@
 // o.foo();
 // (o.foo = o.foo)(); // 2 non strict mode because (o.foo = p.foo) just gives you reference to function;
 
-// Arrow Function uses lexical this means closest function's this or blobal this
+// Arrow Function uses lexical this means closest function's this or global this
 
 
 // Chapter 3:
 // Type: String Boolean, Number, null, undefined, Object, Symbol, BigInt 
 // null is sometime refered as object 
-// console.log(typeof null);
+// console.log(typeof null); // 'object
 
 // Funtion is subtype of object technially callable object 
 // Array are also form of object 
@@ -394,7 +394,7 @@
 // }
 // for (const key of myObject) {
 //     console.log(key);
-// } // myObject is not enumerable
+// } // myObject is not interable
 
 // var myArray = [1];
 // Object.defineProperty(myArray, '1', {
@@ -443,7 +443,7 @@
 // myObject.a;
 // its like [[Get]]()
 
-// Its look for current object if its find then it will return the value other wise it look for [[Prototype]] chain and id it does not find atob
+// Its look for current object if its find then it will return the value other wise it look for [[Prototype]] chain and if it does not find
 // their as well it will return undefined
 
 // myObject.b; //undefined
