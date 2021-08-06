@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .topic {
+            font-size: 24px;
+            color: lightslategray;
+            text-decoration: underline;
+            text-underline-position: below;
+            background-color: lightyellow;
+            font-weight: 700;
+        }
+
+    </style>
+</head>
+
+<body>
+    <p class='topic'></p>
+    <p class='topic'>Manupulating Text node with appendData(), deleteData(), insertData(), replaceData(), substringData()</p>
+    <p id="ex1">Go big Blue Blue</p>
+
+    <p class='topic'>When multiple sibling textNode occur</p>
+    <p id="ex2">Hi, <strong>cody</strong> welcome!</p>
+
+    <p class='topic'>Differenc b/w textContent and innerText</p>
+    <ul>
+        <li>
+            innerText aware of css so if you hidden text, innerText will ignore but tetContent does not.
+        </li>
+        <li>
+            innerText aware css so it will trigger a reflow, whereas textContent will not.
+        </li>
+        <li>innerText ignore the text nodes contained in script, textContent does not...... More on book</li>
+    </ul>
+
+    <p class='topic'>Using normalize() to combine Sibling Text Nodes into One Text Node</p>
+    <div></div>
+
+    <script>
+        console.group('Manupulating Text node with appendData(), deleteData(), insertData(), replaceData(), substringData()');
+        var textNode = document.querySelector('#ex1').firstChild;
+        textNode.appendData('!');
+        textNode.deleteData(7, 5);
+        textNode.insertData(7, 'Blue ');
+        textNode.replaceData(7, 4, 'Pink');
+        console.log(textNode.substringData(7, 4));
+        console.groupEnd();
+
+        console.group('When multiple sibling textNode occur');
+        var ex2Elem = document.querySelector('#ex2');
+        console.log(ex2Elem.childNodes, ex2Elem.children);
+        console.log(ex2Elem.firstChild.textContent, ex2Elem.firstChild.data, ex2Elem.firstChild.nodeValue);
+        console.log(ex2Elem.firstChild.nextSibling);
+        console.log(ex2Elem.lastChild.data);
+        console.groupEnd();
+
+        console.group('Using normalize() to combine Sibling Text Nodes into One Text Node');
+        var pElemNode = document.createElement('p');
+        var textNodeHi = document.createTextNode('Hi');
+        var textNodeCody = document.createTextNode(' Cody');
+        pElemNode.appendChild(textNodeHi);
+        pElemNode.appendChild(textNodeCody);
+        document.querySelector('div').appendChild(pElemNode);
+        console.log(pElemNode.childNodes.length);
+        document.querySelector('div').normalize();
+        console.log(pElemNode.childNodes.length);
+        console.groupEnd();
+
+
+
+
+    </script>
+</body>
+
+</html>

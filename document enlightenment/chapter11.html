@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .topic {
+            font-size: 24px;
+            color: lightslategray;
+            text-decoration: underline;
+            text-underline-position: below;
+            background-color: lightyellow;
+            font-weight: 700;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>DOM Events Overview:</h1>
+    <p class='topic'>Events:</p>
+    <div id="contextMenuEvent">Refer Page 12 or Mozilla Docs</div>
+    <form action="">
+        <textarea id="selectEvent" name="" id="" cols="30" rows="10"></textarea>
+    </form>
+
+    <p class='topic'>Event Flow, Capturing, and propagating</p>
+    <p class='topic'>Removing Event</p>
+    <div>USE: <strong>removeEventLstener()</strong></div>
+
+    <p class='topic'>`this` value when using addEventListener()</p>
+    <div>this is object where the listener attached to</div>
+
+    <p class='topic'>event.target to target the target value because of propagation parent event can call</p>
+
+    <p class='topic'>preventDefault()</p>
+    <p class='topic'>stopPropagation()</p>
+    <p class='topic'>stopImmediatePropagation())</p>
+    <p class='topic'>Custom Event</p>
+    <div><strong>createCustomEvent(), initCustomEvent(), dispatchEvent()</strong></div>
+    <div id="customEvent">CLICK ME</div>
+
+    <p class='topic'>Event Delegation</p>
+    <p id="eventDelegation1">Click a table cell</p>
+    <table border="1">
+        <tbody>
+            <tr>
+                <td>row 1 column 1</td>
+                <td>row 1 column 2</td>
+            <tr>
+            <tr>
+                <td>row 2 column 1</td>
+                <td>row 2 column 2</td>
+            <tr>
+            <tr>
+                <td>row 3 column 1</td>
+                <td>row 3 column 2</td>
+            <tr>
+            <tr>
+                <td>row 4 column 1</td>
+                <td>row 4 column 2</td>
+            <tr>
+        </tbody>
+    </table>
+
+    <script>
+        console.group('Events:')
+        var contextMenuEventEl = document.querySelector('#contextMenuEvent');
+        contextMenuEventEl.addEventListener('contextmenu', function (e) {
+            console.log(e);
+        })
+        var selectEventEl = document.querySelector('#selectEvent').addEventListener('select', function (e) {
+            console.log(this.selectionStart);
+            console.log(this.selectionEnd);
+        })
+        console.groupEnd();
+
+        console.group('Custom Event');
+        var customEventEl = document.querySelector('#customEvent');
+        var cheer = document.createEvent('CustomEvent');
+        cheer.initCustomEvent('goBigBlue', true, false, {goBigBlueIs: 'its gone!'});
+        // cheer.initEvent('goBigBlue', true, false)
+
+        customEventEl.addEventListener('goBigBlue', function (e) {
+            console.log(e.detail);
+        })
+        setTimeout(() => customEventEl.dispatchEvent(cheer), 3000);
+        console.groupEnd();
+
+        console.group('Event Delegation');
+        document.querySelector('table').addEventListener('click', function (e) {
+            if (e.target.tagName.toLowerCase() === 'td') {
+                console.log(e.target.textContent);
+            }
+        }, false)
+        console.groupEnd();
+    </script>
+</body>
+
+</html>

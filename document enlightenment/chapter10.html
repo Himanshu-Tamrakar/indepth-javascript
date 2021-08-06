@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .topic {
+            font-size: 24px;
+            color: lightslategray;
+            text-decoration: underline;
+            text-underline-position: below;
+            background-color: lightyellow;
+            font-weight: 700;
+        }
+
+    </style>
+</head>
+
+<body>
+    <p class='topic'>By default scripts are synchronous it will
+        stop parsing the document, block any further rendering and downloading, and execute
+        the JavaScript</p>
+    <p class='topic'>Using defer to Defer the Downloading and Execution of External JavaScript</p>
+    <div>The
+        script element has an attribute called defer that will defer the blocking, down‐
+        loading, and execution of an external JavaScript file until the browser has parsed the
+        closing html node
+    </div>
+    <ul>
+        <li>
+            Scripts are fetched asynchronously and
+            executed after the HTML is completely
+            parsed
+        </li>
+        <li>DOMContentLoaded event fires after
+            defer script is executed</li>
+        <li>Scripts are executed in orde</li>
+        <li>This is overall the best solution! Use for
+            your own scripts, and when order matters
+            (e.g. including a library)</li>
+    </ul>
+
+    <p class='topic'>Using async to Asynchronously Download and Execute External JavaScript Files</p>
+    <ul>
+        <li>Scripts are fetched asynchronously and
+            executed immediately</li>
+        <li>Usually the DOMContentLoaded event
+            waits for all scripts to execute, except for
+            async scripts. So, DOMContentLoaded
+            does not wait for an async script</li>
+        <li>Scripts not guaranteed to execute in order</li>
+        <li>Use for 3rd-party scripts where order
+            doesn’t matter (e.g. Google Analytics)</li>
+    </ul>
+
+    <p class='topic'>Using the onload Callback for Asynchronous scripts so That We Know When They’re Loaded</p>
+    <div>USE: <strong>onload on createElement('script') listener</strong></div>
+    <p class='topic'>Be Mindful of scripts Placement in HTML for DOM Manipulation</p>
+    <div>Attempt to place all script elements before the closing body element.</div>
+
+    <p class='topic'>Getting a List of scripts in the DOM</p>
+    <div>USE: <strong></strong>document.scripts</strong>>/div>
+
+        <script defer src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js">
+        </scriptsss>
+    <script defer src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js">
+    </script>
+        <script defer src="http://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.0.6/
+    jquery.mousewheel.min.js">
+    </script>
+        <script>
+            /* We know that jQuery is not available because this occurs before the closing
+            <html> element */
+            console.log(window['jQuery'] === undefined); //logs true
+            /* Only after everything is loaded can we safely conclude that jQuery was
+            loaded and parsed */
+            document.body.onload = function () {
+                console.log(window['jQuery'] === undefined);
+                console.log(jQuery().jquery)
+            }; //logs function
+        </script>
+</body>
+
+</html>

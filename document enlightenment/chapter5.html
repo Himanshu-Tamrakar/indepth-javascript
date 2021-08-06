@@ -1,0 +1,117 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        #blue {
+            height: 100px;
+            width: 100px;
+            background-color: blue;
+            border: 10px solid grey;
+            padding: 25px;
+            margin: 25px;
+
+        }
+
+        #red {
+            height: 50px;
+            width: 50px;
+            background-color: red;
+            border: 10px solid grey;
+            position: absolute;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="blue">
+        <div id="red"></div>
+    </div>
+
+    <script>
+        var div = document.querySelector('#red');
+
+        console.log(div.offsetLeft);
+        console.log(div.offsetTop);
+        console.log(div.offsetParent);
+    </script>
+</body>
+
+</html> -->
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        div {
+            height: 50px;
+            width: 50px;
+            background-color: red;
+            margin: 100px;
+            border: 10px solid grey;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div></div>
+
+    <script>
+        var divEdges = document.querySelector('div').getBoundingClientRect();
+        console.log(divEdges);
+    </script>
+</body>
+
+</html> -->
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            margin: 25px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div>
+    </div>
+    <script>
+        var divStyle = document.querySelector('div').style;
+        divStyle.cssText = 'background-color: red;border: 1px solid black;height: 100px;width: 100px;';
+        console.log(divStyle);
+        setTimeout(() => divStyle.cssText = '', 2000);
+        window.getComputedStyles(divStyle);
+    </script>
+</body>
+
+</html> -->

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .topic {
+            font-size: 24px;
+            color: lightslategray;
+            text-decoration: underline;
+            text-underline-position: below;
+            background-color: lightyellow;
+            font-weight: 700;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <p class='topic'></p>
+    <p class='topic'>Adding Document Fragment into live DOM</p>
+    <ul id="ex1"></ul>
+
+    <p class='topic'>Using innerHTML on a Document Fragment</p>
+    <div id='ex2'></div>
+
+    <p class='topic'>Leaving Fragment Containing Nodes n Memory bt Cloning</p>
+    <div>USE: <strong>cloneNode()</strong> method in fragElem</div>
+    <script>
+        console.group('Adding Document Fragment into live DOM');
+        var ulEl = document.querySelector('#ex1');
+        var docFrag = document.createDocumentFragment();
+        ['blue', 'green', 'red', 'yellow', 'pink'].forEach(function (v) {
+            var el = document.createElement('li');
+            el.textContent = v;
+            docFrag.appendChild(el);
+        });
+        console.log(docFrag);
+        ulEl.appendChild(docFrag);
+
+        ['1', 'green', 'red', 'yellow', '5'].forEach(function (v) {
+            var el = document.createElement('li');
+            el.textContent = v;
+            docFrag.appendChild(el);
+        });
+        ulEl.insertBefore(docFrag, ulEl.firstChild);
+        console.groupEnd();
+
+
+        console.group('Using innerHTML on a Document Fragment');
+        var divEl1 = document.createElement('div');
+        var fragElem1 = document.createDocumentFragment();
+
+        fragElem1.appendChild(divEl1);
+
+        fragElem1.querySelector('div').innerHTML = `<ul><li>green</li><li>Blue</li><li>Yellow</li></ul>`;
+
+        document.querySelector('#ex2').appendChild(
+            fragElem1.querySelector('div').firstChild
+        );
+        console.log(document.querySelector('#ex2').innerHTML);
+        console.groupEnd();
+    </script>
+</body>
+
+</html>
