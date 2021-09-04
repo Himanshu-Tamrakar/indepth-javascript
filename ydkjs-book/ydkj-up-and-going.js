@@ -1,13 +1,13 @@
 'use strict';
 
 
-// Group of words, numbers, openrations that perform some task are statement.
+// Group of words, numbers, operations that perform some task are statement.
 // Statement is group of expression
 // Expression that produces some value
 
 // Coercion: Converting one type value to another called Coercion
 
-// Loose comparision make coercion that is why it is slow compare to ===
+// Loose comparision(==) make coercion that is why it is slow compare to tight comparision(===)
 // "99.99" == 99.99 then he will first convert "99.99" to 99.99 then compare
 
 // Javascript is dynamic typed language
@@ -91,15 +91,15 @@ b3 < c3 // true both are string helce comparing lexicographically
 // globale scope or getting an error depending upon 'strict mode'
 
 
-// a4 = 19; // in 'use strict' it is an error otherwise it will create property in window
+a4 = 19; // in 'use strict' it is an error otherwise it will create property in window
 
 
 // 'strict mode tighten the rules for cetain behaviour these are to keep code much safer and less error prone
 // 1. Disallowing auto global variable creation like above(a4)
 
 
-// Closure is a way to remember and contine to access the function's scope(its variable, arguments) even once the function has finished running
-// With closure function remember the variable of its birthplace
+// Closure is a way to remember and continue to access the function's scope(its variable, arguments) even once the function has finished 
+// running, with closure function remember the variable of its birthplace
 
 
 

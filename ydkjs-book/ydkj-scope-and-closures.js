@@ -53,13 +53,18 @@
 // var a = 2; => var, a, =, 2, ;
 
 // 2. Parsing
-// taking stream (array) of tokens and turning it into a tree of nested elements, whick collectively represent grammatical structure of programm.
-// This is called AST (Abstract Sysntac Tree) tree.
+// taking stream (array) of tokens and turning it into a tree of nested elements, whick collectively represent grammatical structure 
+// of programm. This is called AST (Abstract Sysntac Tree) tree.
 
 // 3. Code Generation
-// Taking AST and turning it into executable code. This part varies greatly depending on the language, platform it targetting, and other factor
+// Taking AST and turning it into machine executable code. This part varies greatly depending on the language, platform it targetting, 
+// and other factor
 
 // In jS Engine is more complex than these three steps. There are step of optimization for performance of execution at parsing and code generation phase. 
+//  For example JS engine specifically uses inline caching. 
+// If function strcuture is same then it cache and it is call monomorphic caching and fastest way to execute code.
+// If some arguments mismatch in some level the it is called polymorphic caching
+// is all different then it is mega mosphic and slow
 
 
 // Parsing and Compilation first then execution. 
@@ -78,6 +83,8 @@
 //     console.log(something);
 // }
 
+
+
 //Hoisting
 // function saySomething() {
 //     var greeting = 'Hello';
@@ -88,10 +95,8 @@
 //     }
 // }
 // saySomething();
-
-
 // So scope is determine at the compile time and should not generally affected by runtime conditions.
-// However in non stric mode there are technicallly still two ways to cheat this,modifying the program scope during runtime
+// However in non strict mode there are technicallly still two ways to cheat this, modifying the program scope during runtime
 // Run in not strict mode
 // 1. eval(..)
 // function badIdea() {
@@ -110,8 +115,8 @@
 
 
 // Now there is two reason we should use strict mode 
-// 1. Global variable creation in the case of not use let const or var fr variable declaration
-// 2. It allow two way to change scope at runtime via eval and 'with'
+// 1. Automatic Global variable creation in the case of not use let const or var for variable declaration
+// 2. It allow two way to change scope at runtime via 'eval' and 'with'
 // 3. It changes behaviour for FIB function declaration inside blocks see line 404 chapter 6
 
 // Lexical Scope:
@@ -128,15 +133,16 @@
 
 // Chapter3
 // Shadowing the variable
-// It is possible to access a global variable from the scope where that variable has been shadowd but not through a typica; lexical identifiers reference
+// It is possible to access a global variable from the scope where that variable has been shadowd but not through a typical; 
+// Lexical Identifiers Reference
 
-// let one = 'HImashu';
+// let one = 'Himashu';
 // const two = 'Tamrakar';
 // var studentName = 'Suzy';
 // function printStudent(studentName) {
 //     console.log(studentName); // from printStudent Scope
 //     console.log(window.studentName); // from Global scope 
-//     console.log(window.one); // Undefined // Not present in Global scope only variable that declera with var and function present in global scope
+//     console.log(window.one); // Undefined // Not present in Global scope only variable that declare with var and function present in global scope
 //     console.log(window.two); //undefined
 // }    
 // console.log(window.printStudent);
@@ -243,7 +249,7 @@
 
 // function hoisting and var-flavared variable hoisting attach their name identifier to the nearest enclosing
 // function scope(or if Non the global scope), not a block scope
-// let and const still hoist(but unavailable to use due to TDZ). But there two declaration forms attach t  their closing
+// let and const still hoist(but unavailable to use due to TDZ). But there two declaration forms attach to  their closing
 // block not function as var and function declation
 
 // Hoisting: Declaration vs Expression
@@ -251,7 +257,10 @@
 // function greeting(){}
 
 // greeting() // ReferenceError but: undefined is not function
+// console.log(greeting); // will be undefined because var auto initialized with undefined
 // var greeting = function greeting() {}
+// console.log(greeting1); // Error it is not function declaration just a function identfier
+// var greeting = function greeting1() {}
 
 // Variable Hoising:
 // RULE: Function declaration are hoisted first then variables
@@ -267,7 +276,7 @@
 
 // Interesting
 
-// Here keepgoing and value are at outer scope so not redeclaration
+// Here keep going and value are at outer scope so not redeclaration
 // var keepgoing = true;
 // while (keepgoing) {
 //     var value = Math.random();
@@ -292,7 +301,7 @@
 //     value = i * 10;;
 //     console.log(`${i}: ${value}`);
 // }
-// This is just a conseptual model 
+// This is just a conseptual model: Canonial Form is this
 
 
 // Temporal Dead Zone
@@ -300,7 +309,7 @@
 
 // var has almost unobserble TDZ because at the time of hoist it auto initilized with undefined
 // let is also hoist but it is not available untill initilize happens as let does not auto initilize with undefined so 
-// it gives reference error ot TDZ error.
+// it gives reference error to TDZ error.
 
 // studentName = 'Himanshu'; // Reference error
 // console.log(studentName);
@@ -411,7 +420,7 @@
 // }
 // ask();
 
-// JS specification says that function declaration inside ogf blocks are blocked scope, so the answer should be Reference Error, However
+// JS specification says that function declaration inside of blocks are blocked scope, so the answer should be Reference Error, However
 // most browser based JS engine (including v8 that is for chrome and node)will treate this as TypeError function identifier is outside of
 // if block but it is yet undefined as if block does not runs...
 // So clearly this is based on environment and js engine
@@ -450,7 +459,7 @@
 // Closure: Function remember the variables of outer scope or in its birth place even though function has been finished.
 // Even though closure is lexical scope but it is runtime charecteristics
 // Closure is live link not a snapshot
-// Closure is on variavle never on value
+// Closure is done on variables not on values
 
 
 // function manageBtnEvents(btn) {
@@ -574,7 +583,7 @@
 // }
 // whatsTheDealHear(3);
 
-// Function Name Scape:
+// Function Name Scape: ofTheTeacher will have scope inside the function only not outside the function
 // var askQuestion = function ofTheTeacher() {
 //     let ofTheTeacher = 'Confused Yet!';
 //     var val = Math.random();
@@ -592,7 +601,8 @@
 
 
 // Arrow Function:
-// Does not contains its this uses lexical this means nearest enclosing function's this or global this 
+// Does not have its own 'this', It uses lexical 'this' means nearest enclosing function's 'this' or 'global this' and it does not have
+// arguments as well 
 // always anonymous
 
 
@@ -615,12 +625,13 @@
 // Function declaration hoist to it function scope and initialize with actual function value 
 // First Function declaration hoist then var variable
 
-// Var also hoist like function declaration but it initilizes with undefined value 
+// Var also hoist like function declaration but it initilizes with 'undefined' value 
 
 // function declaration hoisting is nice help maintain better code 
 // variable hoisting is not good choice
 
-// let and const also hoist but then do not get initialize automatically but untill then they get initilize it went to TDZ
+// let and const also hoist but then do not get initialize automatically but untill then they get initilize via code until then 
+// it went to TDZ
 
 
 // Callback : inversion of control, part of program that execute later by other stakeholder

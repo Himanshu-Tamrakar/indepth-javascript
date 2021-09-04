@@ -1,0 +1,7 @@
+<h2 nsDoNothing>Races</h2>
+<input type="text" [value]="inputValue" value="hello" name="" id="">
+
+<div class="loggable" logText="text">Complex Selector</div>
+<div class="loggable" logText="text" notLoggable="true">Complex Selector: Not applied</div>
+
+<div (poliSelected)="eventFromLoggableDirective($event)" loggable [logText]="logText.toString()" logText1="{{logText}}" [logText2]="user"> Loggable Directive</div>
