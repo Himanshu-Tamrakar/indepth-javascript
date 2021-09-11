@@ -1,7 +1,7 @@
 // JS have  built in type
-// number, boolean, string, null undefined, NaN, Symbols(added in ES6), object, BigInt(ECMA20)
+// number, boolean, string, null, undefined, NaN, Symbols(added in ES6), object, BigInt(ECMA20)
 
-// typeof: typeof return type of a variable
+// typeof: typeof return type of value stored in a variable
 // but
 // typeof null === 'object' // this is bug and never gonna fix
 // to check null:
@@ -14,17 +14,20 @@
 
 // array's are not special type
 typeof [1, 2, 3] === 'object' //true
-// most appropriat to think as subtype og object
+// most appropriat to think as subtype of an object
 
 // undefined vs undeclared:
-// undefined means value is declared in their accessible scope but not have undefined value
-// undeclare means variable is not declared and not accessible
+// Variables that have no value currently actually have the undefined value. Calling typeof against such variables will return "undefined" :
+// It’s tempting for most developers to think of the word “undefined” as a synonym for “undeclared.” However, in JS, these two concepts
+// are quite different.
+// An “undefined” variable is one that has been declared in the accessible scope, but at the moment has no other value in it. By contrast, an
+// ** “undeclared” variable is one that has not been formally declared in the accessible scope.
 
 // var a;
 // typeof a; // 'undefined'
 // console.log(b); // Reference error: b is not defined but
 // typeof b // 'undefined' not declared
-// // typeof is very userfull:
+// // typeof is very usefull
 
 // function doSomething() {
 //     var helper = (typeof FeatureXYZ !== 'undefined') ? FeatureXYZ : function() {};
@@ -67,10 +70,12 @@ typeof [1, 2, 3] === 'object' //true
 // arr[5] // 6 
 
 // Array Like:
-// array like values are not actually array.we have to make them actual array so that we can user all the methods available in arrays like indexOf, concat, forEach etc...
+// array like values are not actually array. We have to make them actual array so that we can use the methods available in arrays,
+//  like indexOf, concat, forEach etc...
 
-// DOM query return list of elems that are not array but arraly like structure
-// argumants in function are array like
+
+// DOM query return list of elems that are not array but arraly like structure ex. // document.querySelectorAll()
+// argumants in function are array like structure but not a actual array
 
 // function foo() {
 //     // var arr = Array.prototype.slice.call(arguments);
@@ -81,7 +86,7 @@ typeof [1, 2, 3] === 'object' //true
 // foo(1, 2, 3, 4);
 
 // String: String are not array of charector in js.
-// they have command methods like indexOf, concat but they are not array 
+// they have comman methods like indexOf, concat but they are not array 
 // var a = 'abc';
 // var b = ['a', 'b', 'c'];
 // a[0] // a
@@ -90,9 +95,10 @@ typeof [1, 2, 3] === 'object' //true
 // b.indexOf(0);
 // a === b // false
 
-// String are immutable and array are quite mutable
+// String are immutable and array are quite mutable.
 // a[0] in string is not valid sysntax for string in older browser but uses a.charAt(0)
 
+// Borrowing
 // var arrA = Array.prototype.map.call(a, function todo(val, i) {return val});
 // var joinA = Array.prototype.join.call(a, '**')
 // arrA, joinA; // work
@@ -124,13 +130,22 @@ typeof [1, 2, 3] === 'object' //true
 // a.toPrecision(4) // 42.59
 // a.toPrecision(5) // 42.590
 
-// // 42.toFixed(3) // Syntax error // . is swallowed up for 42.
-// 42 .toFixed() // valid
+// ** 42.toFixed(3) // Syntax error // . is swallowed up for 42.
+// ** 42 .toFixed() // valid
 
 
-// 0.1 + 0.2 === 0.3 // false
-// 0.1+0.7 ===0.8 // false
-// For sloating point we have to take tolerance value and that is EPSILON
+// ** The most (in)famous side effect of using binary floating-point num‐
+// bers (which, remember, is true of all languages that use IEEE 754—
+// not just JavaScript as many assume/pretend) is:
+0.1 + 0.2 === 0.3; // false
+// Mathematically, we know that statement should be true . Why is it false ?
+// Simply put, the representations for 0.1 and 0.2 in binary floating point are not exact, so when they are added, the result is not exactly
+// 0.3 . It’s really close, 0.30000000000000004 , but if your comparison fails, “close” is irrelevant.
+
+// Same as 0.1 + 0.7 ===0.8 // false
+
+
+// For floating point we have to take tolerance value and that is EPSILON
 // function numberCloseEngoughToEqual(n1, n2) {
 //     return Math.abs(n1-n2) < Number.EPSILON;
 // }
@@ -145,21 +160,26 @@ typeof [1, 2, 3] === 'object' //true
 // Number.isInteger(42.0) // true
 // Number.isInteger(42.42) // false
 
-// null means empty value
-// undefined means missing value
+// * null means empty value
+// * undefined means missing value
 
-// void operator is to tell it is returning undefined
+// * void operator is to tell it is returning undefined
+// The expression void ___ “voids” out any value, so that the result of
+// the expression is always the undefined value.
+var a = 42;
+console.log(void a, a); // undefined 42
+
 // function doSomething() {
 //     if (!APP.ready) {
-//         return void setTimeout(doSomething, 1000) // avoid side-effect
+//        return void setTimeout(doSomething, 1000) // avoid side-effect
 //     }
 //     var result;
 //     return result;
 // }
 
 
-// NaN dont consider it as not a number consider it as invalid number 
-// It is a number but invalid
+// * NaN don't consider it as not a number consider it as invalid number 
+// It is a number but invalid: refer book
 
 // var a = 1 / '';
 // var b = 'foo';
@@ -215,7 +235,7 @@ typeof [1, 2, 3] === 'object' //true
 
 // Chapter 3:
 // var a = new String('abc');
-// typeof a; // objec
+// typeof a; // object
 // a instanceof String // true
 // a instanceof Object // true
 
@@ -262,7 +282,7 @@ typeof [1, 2, 3] === 'object' //true
 
 // Symbols:
 // Symbol is primitive value added in ES6
-// Symbols are special unique(not strictly guaranteed) values that can be used as properties on objects with lettle fear  of collision
+// Symbols are special unique(not strictly guaranteed) values that can be used as properties on objects with lettle fear of collision
 
 // Prototype;
 // Function Prototype is a Function
@@ -271,10 +291,14 @@ typeof [1, 2, 3] === 'object' //true
 
 
 // Chapter 4:
+// “type casting” (or “type conversion”) occurs in statically typed languages at compile time, 
+// while “type coercion” is a runtime conversion for dynamically typed languages
+
 // Type Casting: Converting one type value to another typeof explicitely: Compile Type
 // type Coarsion: When the conversion happends implicit: Run Time in dynamic language
 
-// When any non-string value is coerced to a string representation, the conversion is handled by the ToString abstract operation.
+// * ToString:
+// * When any non-string value is coerced to a string representation, the conversion is handled by the 'ToString' abstract operation.
 // null => "null"
 // undefined => "undefined"
 // true => "true"
@@ -282,7 +306,7 @@ typeof [1, 2, 3] === 'object' //true
 // var a = 1.08 * 1000 * 1000 * 1000 * 1000 * 10000 * 1000 * 1000 * 1000;
 // a.toString(); // "1.08e+25"
 
-// For regular Object, default toString will return using [[Class]] property
+// * For regular Object, default toString will return using [[Class]] property
 // var a = {firstName: 'HImanshu'};
 // a.toString(); // "[object Object]"
 // var b = [1, 2, 3];
@@ -301,7 +325,8 @@ typeof [1, 2, 3] === 'object' //true
 // JSON.stringify("23"); // ""23""
 // JSON.stringify(true); // "true"
 
-// // JSON.string omit undefined, function,
+// ** JSON.stringyfy() omit properties with undefined, function and Symbol.
+// JSON.stringify(..) an object with circular reference(s) in it, an error will be thrown.
 // var a = {
 //     firstName: 'Himanshu',
 //     lastName: undefined, // igonored
@@ -310,7 +335,7 @@ typeof [1, 2, 3] === 'object' //true
 //     heyNull: null,
 // }
 
-// if an object contains a toJSON method then JSON.stringify call that method and 
+// ** if an object contains a 'toJSON' method then JSON.stringify call that method and 
 // var a = {
 //     firstName: 'Himanshu',
 //     lastName: undefined, // igonored
@@ -324,7 +349,7 @@ typeof [1, 2, 3] === 'object' //true
 // JSON.stringify(a); // "{}"
 
 
-// // JSON.stringify accept second argumat that is replacer accept array or function
+// ** JSON.stringify accept second argumat that is replacer accept array or function
 // var a = {
 //     firstName: 'Himanshu',
 //     lastName: undefined, // igonored
@@ -343,14 +368,15 @@ typeof [1, 2, 3] === 'object' //true
 
 
 // * ToNumber:
-// ** if any non number value is used in a way that requires it to be a number, such as a ,athematical operation, ToNumber abstract operation performance
+// * If any non-number value is used in a way that requires it to be a number, such as a mathematical operation, the ES5 spec defines the
+// * 'ToNumber' abstract operation in section 9.3. For example, true becomes 1 and false becomes 0 . undefined becomes NaN , but (curiously) null becomes 0
 
 // ** ToNumber for string value that is not a number result in NaN(invalid number) and string start wiht 0 not consider as octal number in ToNumber 
 
-// ** Object and Array first convert into its primitive value if they are not already anumber then ToNumber will perform 
-// ** To convert to this primitive value ToPrimitive abstract operation will consult the value in question to see if it has a valueOf() method. If valueOf present and it is primitive then
-// that value is used for coersion otherwise toString() will provide the value for coersion
-// If neither operation provide a primitive value TypeError is thrown.
+// ** Object and Array first convert into its primitive value if they are not already a number then ToNumber will perform.
+// ** To convert to this primitive value ToPrimitive abstract operation will consult, the value in question to see if it has a valueOf() method. 
+// ** If valueOf present and it is primitive then that value is used for coersion otherwise toString() will provide the value for coersion
+// ** If neither operation provide a primitive value TypeError is thrown.
 
 // var a = {
 //     valueOf: function () {
@@ -371,7 +397,7 @@ typeof [1, 2, 3] === 'object' //true
 // console.log(Number(a)); // 42
 // console.log(Number(b)); // 41
 // console.log(Number(c)); // 42
-// console.log(a + 10); // 4200
+// console.log(a + 10); // 4210
 // console.log(b + 10); // 4110
 // console.log(Number("")); // 0
 // console.log(Number([])); // 0, toString is ""
@@ -386,50 +412,66 @@ typeof [1, 2, 3] === 'object' //true
 
 // All the falsy value become false when coersed
 // Falsy values are:
-// null, undefined, "", 0, -0, false, NaN
+// * null, undefined, "", 0, -0, false, NaN
 
 // Rest are truty value 
 
 
-// Falsy Object:
 // new Boolean(false); // true because it is object and object is not in falsy value
-// Falsy object in not just a object wrapped aroung with falsy value 
-// They are not a part of jS itself they came from browser
+var a = new Boolean(false);
+var b = new Number(0);
+var c = new String("false");
+var d = Boolean(a && b && c); // true;
+
+// Falsy Object:
+// Objects are truthy basically but there are some falsy object as well like document.all.
+// if “falsy objects” are not just objects(like a, b, c) wrapped around falsy values,
+// what the heck are they?
+
+// ** 'falsy object' are not a part of jS itself they came from browser
+// ** A “falsy object” is a value that looks and acts like a normal object
+// ** (properties, etc.), but when you coerce it to a boolean , it coerces to a false value.
 // Non Standrd, deprecated document.all is still present because to many lagecy code out there so Js make it a falsy value 
 // document.all // Array like object but not actual array
-// if (document.all) {
+// ** if (document.all) {
 //     console.log(234); // never runs
 // }
 // document.all is falsy object 
 
 
+// *** Explicite Coersion:
+
+// unary + will do Number coersion
 // +"3.14"; // 3.14
+// The unary - operator also coerces like + does, but it also flips the
+// sign of the number. However, you cannot put two ( -- ) next to each other to unflip the sign, as that’s parsed as the decrement operator.
+// Instead, you would need to do - -"3.14" with a space in between and that would result in coercion to 3.14 .
+
 // 3.14.toString();
 // toString boxed to its object type and then convert to string 
 
+// Date to number
+// +new Date(); // timestamp in ms
 
-// + new Date(); // timestamp in ms
-
-// curious case of ~
+// Curious case of ~
 // ~ bitwie not 
 // In JS bitwise operation happened in 32 bits 
 // so when we perform ~ it confirms operand to 32 bits first 
-
-
 
 0 | -0 // 0
 0 | NaN // 0
 0 | Infinity // 0
 0 | -Infinity // 0
-// As in JS number are 64 bits so with bitwise operator Js fir convert it to 32 nteger so it becomes 0
-
-
-// ** */ ~x is roughly the same as -(x+1)
+// As in JS number are 64 bits so with bitwise operator Js first convert it to 32 nteger so it becomes 0
+// ** The ~ operator first “coerces” to a 32-bit number value, and then performs a bitwise negation (flip‐ ping each bit’s parity).
+// ** ~x is roughly the same as -(x+1)
+// var fN = 'Hello World';
+//* ~fN.indexOf('ol') => 0 falsy because ~x = -(x+1) => -(-1+1) => 0 => falsy
 
 // Math.floor(-49.6); // -50
 // ~~-49.6 // 49
 
-// Explicitly: Parsing Numeric String:
+// * Explicitly: Parsing Numeric String:
 // var a = "42";
 // var b = "42px";
 
@@ -439,8 +481,18 @@ typeof [1, 2, 3] === 'object' //true
 // Number(b); // NaN
 // Number.parseInt(b); // 42
 
-// Number.parseInt() //For non string type value first in convert to string then convert to number
+// ** Number.parseInt() //For non string type value, first in convert to string then convert to number
+// example: 
+// parseInt( 1/0, 19 ); // 18
+// here 1/0 will convert to string so it become "Infinity" and then "Infinity"'s "I" to 19 base is 18.
+// var a = {
+//     num: 21,
+//     toString: function () {return String(this.num * 2);}
+// };
+// parseInt(a); // 42
+
 // Number.parseInt([1,2,3]); // first string [1,2,3] => "1,2,3" then to Number => 1
+// parseIn take second argument as base.
 
 
 // Explicite Boolean:
@@ -454,20 +506,25 @@ typeof [1, 2, 3] === 'object' //true
 // Boolean(a);
 // !!a; // true
 
+// * Implicit Coearsion 
 // Implicitly String <-> Number
 
+// For normat operands If either operand is string then + operator works as concatination otherwise plus in Math.
+// It’s a common misconception that the difference is whether one or both of the operands is
+// a string , as that means + will assume string concatenation. While that’s partially true, it’s more complicated than that
+var a = [1, 2];
+var b = [3, 4];
+a + b; // "1,23,4"
+// Neither of these operands is a string , but clearly they were both coerced to string s and then the string concatenation kicked in. So
+// what’s really going on?
 
-// According to the ES5 spec, the + algorithm (when the object value is operand) will
-// concatenate f either operand already string or if the following steps produce a 
-// string representation. So when + recieve an object for either operan, It first cll [[ToPrimitive]]
-// abstract operationthen calls the [[DefaultValue]] algo
+// According to the ES5 spec, section 11.6.1, the + algorithm (when an object value is an operand) will concatenate if either operand is
+// either already a string, or if the following steps produce a string representation. So, when + receives an object (including array ) for
+// either operand, it first calls the ToPrimitive(first valueOf is present otherwise toString) abstract operation (section 9.1) on the value, which then calls the [[DefaultValue]] 
+// algorithm (section 8.12.8) with a context hint of number .
 
-// it is identical like ToNumber operation first it check valueOf if it returns a primitive that use otherwise call
+// ** It is identical like ToNumber operation first it check valueOf if it returns a primitive that use otherwise call
 // toString.
-
-// var a = [1,2];
-// var b = [3,4];
-// a+b; //[1,2] => "1,2" and "3,4" then + concatnate 1,23,4
 
 // var a = 42;
 // (a +"") vs String(42):
@@ -488,9 +545,8 @@ typeof [1, 2, 3] === 'object' //true
 
 
 // - convert string to number and perform arithmatic operation
-
 // [3] - [2]; // 1
-
+// as + is overloaded but - is only Math minus operation hence string is also converting to number and then
 // First they coersed to string then coearsed to Number;
 
 
@@ -507,9 +563,10 @@ typeof [1, 2, 3] === 'object' //true
 // a || b; // 42
 // a && b; // "abc"
 // c || b; //"abc";
-// c &&  b; //null
+// c && b; //null
 
-// ** || operator skips all falsy value 
+// ** || operator skips all falsy value; Short circuit operator
+
 
 // **
 // var a = 42;
@@ -522,26 +579,36 @@ typeof [1, 2, 3] === 'object' //true
 //  provided a && (b || c) results to "foo" and eventually "foo" result to true as truty value 
 
 
+// * Symbol Coersion:
+// explicit coercion of a symbol to a string is allowed, but implicit coercion of the same is disallowed and throws an error
+// symbol values cannot coerce to number at all (throws an error either way), but strangely they can both explicitly and implicitly 
+// coerce to boolean (always true ).
+
+
 // ** == and ===:
 // A very common misconception about these two operator is "==" checks the value only for equality and "===" checks both value and types for 
 // comparision. While that sound nice and resonable, It's inaccurate. 
 // Countless well repected JS books and blogs have said exaclty the that, but unfortunatily they are all wrong.
 
 // ** == ALLOW COERSION FOR IN THE EQUALITY COMPARISION AND === DOES NOT. 
-// There is no reason for saying which one is more performant both of them, It should be just if you want comparision allow coersion then use ==
-// otherwise ===
+// There is no reason for saying which one is more performant both of them, It should be just if you want comparision 
+// allow coersion then use == otherwise ===
 
 
 // compatision algo:
 // if type are same then it campare naturally like 42 is equal to 42
 // Minor exception
-// NaN will never equal to NaN 
+// NaN will never equal to NaN; NaN is only type that is not reflexive
 // +0 are equal to -0
 
+// The final provision in clause 11.9.3.1 is for == loose equal it
 // if operands are Object(function, array) then it check the reference to same object or not 
-// Rest via coersion first to make both the operand same type then compare the values
+// It’s a very little known fact that == and === behave identically in the case where two object s are being compared!
 
-// comparing string and number using ==:
+// In loose comparision coersion first to make both the operand same type then compare the values
+
+// ** Comparing string and number using ==:
+// in == string operand will coersed to number then comparision take place
 
 // ** comparing anything with boolean via ==:
 // var a = "42";
@@ -585,7 +652,7 @@ typeof [1, 2, 3] === 'object' //true
 // if Type(y) is either string or number and Type(x) is Object then return y == ToPrimitive(x)
 // var a = 42;
 // var b = [42];
-// a == b; // true: b coearse via ToPrimitive and call valueOd or ToString that return "42" and 42 will become 42 then
+// a == b; // true: b coearse via ToPrimitive and call valueOf or ToString that return "42" and 42 will become 42 then
 
 
 // var a = "abc";
@@ -639,5 +706,25 @@ typeof [1, 2, 3] === 'object' //true
 
 
 
+// Chapter 5:
 
+// * `foo` labeled-loop
+// foo: for (var i = 0; i < 4; i++) {
+//     for (var j = 0; j < 4; j++) {
+//         // whenever the loops meet, continue outer loop
+//         if (j == i) {
+//             // jump to the next iteration of
+//             // the `foo` labeled-loop
+//  *           continue foo; // or break foo;
+//         }
+//         // skip odd multiples
+//         if ((j * i) % 2 == 1) {
+//             // normal (nonlabeled) `continue` of inner loop
+//             continue;
+//         }
+//         console.log(i, j);
+//     }
+// }
 
+[] + {}; // [Object Object] first evaluated [] that result using ToPrimitive "" then expression '+ {}' coersed to number and result [Object Object]
+{ } +[]; // 0 first evaluate {} that result that is empty and then expression "+[]" coersed to 0 so result is 0

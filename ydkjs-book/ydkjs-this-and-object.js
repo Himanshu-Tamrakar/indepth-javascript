@@ -83,11 +83,12 @@
 // It is not where the function decleared but it is how the function called
 
 
-// This is neither a reference to  the function itself nor is it a reference to the the function's lexical scope.
-// this is actually binding that made when a function is invoked and what it references is determined entirely by the call-site where the function is called 
+// This is neither a reference to the function itself nor it is a reference to the the function's lexical scope.
+// this is actually binding that made when a function is invoked and what it references is determined entirely by the call-site 
+// where the function is called 
 
 // Chapter 2:
-// call site means the location where a function is called 
+// call site means the location where a function is being called 
 
 
 // Binding Rules:
@@ -98,7 +99,7 @@
 // var a = 2;
 // foo();
 
-// In' non stric' mode in function declaration this point to global object heer global object will be window. 
+// In' non stric' mode in function declaration this point to 'global object' here 'global object' will be window. 
 // In strict mode this will be undefined
 
 // function foo() {
@@ -108,7 +109,7 @@
 
 // void function () {
 //     "use strict";
-//     foo(); // Still point to global object
+//     foo(); // Still point to 'global object'
 // }();
 
 
@@ -193,7 +194,7 @@
 // var b = bar(10, 8);
 // console.log(b);
 
-// In apply arguments get spread using ... automatically
+// In 'apply' arguments get spread using '...' automatically
 
 // Other usefull pattern
 // function foo(something) {
@@ -381,6 +382,19 @@
 // configurable: false prevents ability to use delete operator to remove an existing property 
 
 // Enumarable:
+
+// A for...in loop only iterates over enumerable, non-Symbol properties. The loop will iterate over all enumerable properties of the object 
+// itself and those the object inherits from its prototype chain (properties of nearer prototypes take precedence over those of prototypes 
+// further away from the object in its prototype chain).
+
+// The for...of statement creates a loop iterating over iterable objects, including: built-in String, Array, array-like objects 
+// (e.g., arguments or NodeList), TypedArray, Map, Set, and user-defined iterables. It invokes a custom iteration hook with 
+// statements to be executed for the value of each distinct property of the object.
+
+// The for...in statement iterates over the enumerable properties of an object, in an arbitrary order.
+// The for...of statement iterates over values that the iterable object defines to be iterated over.
+
+
 // var myObject = {b: 29};
 // Object.defineProperty(myObject, 'a', {
 //     value: 10,
@@ -412,8 +426,8 @@
 //     console.log(key);
 // } // 1, 22
 
-// Array is iterable
-// Objects are not iterable
+// ** Array is iterable
+// ** Objects are not iterable
 
 // Immutability:
 // writable: false,
@@ -506,7 +520,7 @@
 // Iteration: Lateron.....?
 
 
-// chapter 4: mixing Inplicite and Explicite
+// chapter 4: mixing Implicite and Explicite
 
 // Chapter 5: Prototypes
 // property acccessor[[Get]] follows the prototype link
@@ -527,14 +541,22 @@
 //     enumerable: false
 // })
 // var obj = Object.create(anotherObject);
-// for (const key in obj) {
+// for (const key in obj) { // With regard to enumarability
 //     console.log(key); // a only
 // }
 
-// console.log(('a' in obj)); //true
-// console.log(('b' in obj)); // true
+// console.log(('a' in obj)); //true:  Regardless of enumarability
+// console.log(('b' in obj)); // true: Regardless of enumarability 
 
 // Shadowing Example: 
+// Shadow means creating the same name property even though same property present in highter level in prototype chain
+// 1.  If property present in current object then it will just update the value is writtable is true
+// 2.  If property presetn in both current and [[prototypechain]] then just shadowing if [[prototype]] property writable: true or false does not matter
+// 3.  If property not present in current object but available in [[prototype]] then three case
+// 3.a If [[prototype]] chain contains property but it is mark as wriable as false then will not shadow 
+// 3.b If [[prototype]] chain contains property but it is mark as wriable as true then wil shadow 
+// 3.c [[prototype]] chain contains the property but it is setter then shodow not allowed
+
 // var anotherObject = {
 //     foo: 10,
 //     bar: 20
@@ -558,7 +580,7 @@
 
 // var myObject = Object.create(anotherArray);
 // console.log(myObject.foo);
-// myObject.foo = 'foo1'; // if on the protptype chain foo is writable false then error will com
+// myObject.foo = 'foo1'; // if on the protptype chain foo is writable false then error will come
 // console.log(myObject.foo, anotherArray.foo);
 
 // One more nuance:
@@ -576,8 +598,8 @@
 // myObject.foo = 'baar';
 // console.log(myObject.foo, anotherObject.foo);
 
-
-
+// Functions aren’t constructors, but function calls are “constructor calls”
+// if and only if new is used.
 // function Foo() {
 
 // }
@@ -587,7 +609,7 @@
 // Foo.prototype.constructor === Foo // true
 // a.__proto__.constructor === Foo; // true
 
-// a.constructor === Foo // true: There is no direct contructor in a but it is in its prototype like above
+// a.constructor === Foo // true: There is no direct contructor in 'a' but it is in its prototype like above
 
 // Function are not contructors but function calls are "contructor call"
 
@@ -613,7 +635,21 @@
 // a.constructor === Object // false
 
 
-// (Prototypical) Inheritance:
+// ** (Prototypical) Inheritance:
+
+// **Make sure the difference between instanceof and isPrototypeOf in MDN
+
+// The isPrototypeOf() method checks if an object exists in another object's prototype chain.
+// Foo.prototype.isPrototypeOf( a );
+// The question isPrototypeOf(..) answers is:
+// in the entire [[Prototype]] chain of a , does Foo.prototype ever
+// appear?
+
+// a instanceof Foo; // true
+// The instanceof operator takes a plain object as its lefthand operand
+// and a function as its righthand operand. The question instanceof
+// answers is: in the entire [[Prototype]] chain of a , does the object
+// arbitrarily pointed to by Foo.prototype ever appear?
 
 // function Foo(name) {
 //     this.name = name;
@@ -761,10 +797,16 @@
 
 // Chapter 6:
 // we have to think different from class/inheritance design pattern to delegation design pattern 
-// In class we happily use polymorphism buthaving the same name method to parent and in child class but
+// In class we happily use polymorphism but having the same name method to parent and in child class but
 // In OLOO(Object link to other object design delegation) we try to avoid the polymorphism ascutlly its all shadowing
 // Delegation is very powerfull design pattern very distinct from patent child class machansm
 
+// Object.create(..) creates a new object ( bar ) linked to the object we
+// specified ( foo ), which gives us all the power (delegation) of the [[Pro
+// totype]] mechanism, but without any of the unnecessary complica‐
+// tion of new functions acting as classes and constructor calls,
+// Object Links confusing .prototype and .constructor references, or any of that
+// extra stuff.
 
 // Cyclic Prototype Value not allowed
 var anotherObject = {
@@ -831,9 +873,9 @@ Object.setPrototypeOf(myObject, anotherObject);
 
 
 // Both the linking is exactyl same
-// We have greatly simplified all the stuff in OLOO that are going on OO model
-// because we are just linking objects to each other without needing all the cruft and confusion of things that look like(but dont behave) clases, with constructor
-// and prototypes and new calls
+// We have greatly simplified all the stuff(like no confusing .contructor or .prototype) in OLOO that are going on OO model
+// because we are just linking objects to each other without needing all the cruft and confusion of things that look 
+// like(but dont behave) clases, with constructor and prototypes and new calls
 
 // Widget Example
 // function Widget(width, height) {

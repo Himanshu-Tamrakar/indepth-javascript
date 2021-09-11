@@ -1,4 +1,5 @@
 'use strict';
+
 // Not worked
 // function another() {
 //     {
