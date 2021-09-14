@@ -1,78 +1,89 @@
-// Chapter 1:
-// A program in chinks:
+// **Chapter 1:
+// A program in chunks:
 // You may write your JS program in one.js File, but your program is almost certainly comprised of 
 // several chinks, only once of which is going to execute now, and the rest of which will execute later.
-// Most common chunk is function 
+// Most common chunk is function.
 
-// Anytime you wrap a portion of code into a function and specify that it should be executed in respose to some event like timer, event, ajax respose, etc,
-// you are creating a later chunk of your code, and thus introducing asynchony to your program
+// Anytime you wrap a portion of code into a function and specify that it should be executed in respose to some event like 
+// timer, event, ajax respose, etc, you are creating a later chunk of your code, and thus introducing asynchony to your program
 
 // Console is browser implemention and I/O could delay in some browser
 
 
-// Event Look:
-// Let's make a claim: despite your clearly being able to write asynchronous JS code(like timers), up untill recently ES6 JS itself has actully
-// never had any direct notion of asynchrony built into it.
+// *Event Loop:
+// Let's make a claim: despite your clearly being able to write asynchronous JS code(like timers), up untill recently ES6 JS itself has
+// actully never had any direct notion of asynchrony built into it.
 // What! that seems a crazy clearTimeout. Infact its quite true. The Js engine itself has never done anything that execute a single chunk
-// of your program at any fiven moment. 
-// So By whone then
+// of your program at any moment. 
+// So By whome then?
 // The JS engine does not run in solation. Is runs inside a hosting environment, which is for most edvelopers the typical browser. 
 
-// Bu the one common thread, all the environments where JS engine present has machanism to run multiple chinks of programs over TimeRanges, at each
-// moment invoking the Js engine to called the event loop.
+// But the one common thread, all the environments where JS engine present has machanism to run multiple chunks of programs over 
+// TimeRanges, at each moment invoking the Js engine to called the event loop.
 
-// In other words, the JS engine has had no innate sense of time, but has instead been an on demand execution environment for any arbiitarary snippet oj JS. Its the
-// surroundng environment that has always schduled events 
+// In other words, the JS engine has had no innate sense of time, but has instead been an on demand execution environment for any 
+// arbiitarary snippet oj JS. Its the surrounding environment that has always scheduled events 
 // Page: 6 for more 
 
-// settimeout tell that piece of code will always run after given time not at exaxt given time due to callback queue(long running task present in JS engine or queue is contains next tasks
+// settimeout tell that piece of code will always run after given time not at exact given time due to callback queue
+// (long running task present in JS engine or queue is contains next tasks
 
-// Parallel Threading:
-// async is not parallel. async means now and later
+//*Parallel Threading:
+// It’s very common to conflate the terms “async” and “parallel,” but they are actually quite different. Remember, async is about the gap
+// between now and later. But parallel is about things being able tooccur simultaneously
+
 // Javascript is single threaded behaviour
 
-// Parallel threading briings non determinism hugely but async is also non deterministic but not as parallel programming
-// In js does not share memmory between threads
-
+// Parallel threading brings non determinism hugely but async is also non deterministic but not as parallel programming because
+// js does not share memmory between threads
+// JavaScript never shares data across threads, which means that level of nondeterminism isn’t a concern. 
+// But that doesn’t mean JS is always deterministic
 
 // function-ordering non determinism is race conditions
 
 // Concorancy:
 // Page: 13 book
 // Concorancy as task level as compare to operation level 
+// You can think of concurrency then as “process”-level (or task-level) parallelism, 
+// as opposed to operation level parallelism (separate-processor threads).
 
 
 // Coorporation:
 // Jobs:
-// Asof ES6, there's a new concept layered on the top of event lppl queue called the job queue. the most likely exposure you will have to 
+// *As of ES6, there's a new concept layered on the top of event loop queue called the job queue. the most likely exposure you will have to 
 // it is with the asynchronous behaviour of Promise. 
 
 // The event look is like amusement park ride. one you finish the ride you have to go to the end of the line to take ride again.again
-// where the jobs queue s finishing the ride and cutting the line ang getting right back on
+// where the jobs queue s finishing the ride and cutting the line and getting right back on
 
-// A job ca also cause more jobs to add jobs end of the same queue and t could spin infinetly. thus starving the program of the ability
+// A job can also cause more jobs to add jobs end of the same queue and that could spin infinetly. thus starving the program of the ability
 // to ove on to the next event loop tick.
 
-// Jobs happens at the end of the currnt event loop tick, and the timers fires to schedule fot the next event loop tick. 
+// Jobs happens at the end of the currnt event loop tick, and the timers fires to schedule for the next event loop tick. 
 
 // Js engine reorder the statements for optimization purpose without effecting result
 
+// Review:
+// ** Whenever there are events to run, the event loop runs until the queue is empty. Each iteration of the event loop is a tic-k. User inter‐
+// action, IO, and timers enqueue events on the event queue.At any given moment, only one event can be processed from the 
+// queue at a time. While an event is executing, it can directly or indi‐rectly cause one or more subsequent events.
+
+
 
 // Chapter 2:
-// Callbacks are fundamental unit of asynchrony in JS but they are nt enough land scape of async programming as JS matures.
+// Callbacks are fundamental unit of asynchrony in JS but they are not enough land scape of async programming as JS matures.
 
-// First out brains plan things out in sequencial, blocking, single threded sentic ways but callbacks express asunchronous flow in a rather non linear, non sequencial, way 
-// whick makes reasoning properly about such code much harder. Hard to reason code is bad code.
+// First out brains plan things out in sequencial, blocking, single threded sentic ways but callbacks express asynchronous flow in a 
+// rather non linear, non sequencial, way whick makes reasoning properly about such code much harder. Hard to reason code is bad code.
 
-// We need a way to express asunchrony in a more synchronous, sequencial, blocking, manner, just like out brain do.a
+// We need a way to express asynchrony in a more synchronous, sequencial, blocking, manner, just like out brain do.
 
-// Secong callback suffer inversion of control(trust issue) give control to other programe.callback
+// Second callback suffer inversion of control(trust issue) give control to other programe.callback
 
-//  ad hoc logic to solve trust issue is possible but its more difficult than it should be and it produces code that is clunkier, harder to maintain, and likily issuffient protected from
-// these hazzareds
+//  ad hoc logic to solve trust issue is possible but its more difficult than it should be and it produces code that is clunkier, 
+// harder to maintain, and likily issuffient protected from these hazzareds
 
-// We need generalized solution for all  the trust issues
-
+// We need generalized solution for all the trust issues
 
 // We explored the terminology and concepts around asynchronous programming in JSON. Our focus is under standing single threaded event loop queue that drive all the events.
 // We also explored various vays of concorancy patterns explaiin the relationships between simultaneously running chains of events ot processes.
@@ -130,7 +141,7 @@
 
 
 // Thenable duck typing:
-// given a promise constructed by new Promise(...) SyntaxError, 
+// given a promise constructed by new Promise(...), 
 // p instanceof Promise is not sufficient to check for Promise there are number of reasons: 
 
 // We can recieve promise from another window/iframe that would have it own promise different from the current window,
@@ -138,7 +149,7 @@
 
 // Any object can have then method, that can look like a promise,
 
-// The general term fot type checks that make assumptions abour a valie's type based on its shape(what properties are present) is called duck typing.
+// The general term fot type checks that make assumptions about a value's type based on its shape(what properties are present) is called duck typing.
 
 // if (
 //     p !== null &&
@@ -154,12 +165,15 @@
 // Promise Trust:
 
 // Calling To Early: 
+// Primarily, this is a concern of whether code can introduce Zalgo- like effects (see Chapter 2), where sometimes a task finishes syn‐
+// chronously and sometimes asynchronously, which can lead to raceconditions. Promises by definition cannot be susceptible to this concern,
+// because even an immediately fulfilled Promise (like new Promise(function(resolve){ resolve(42); }) ) cannot be
+// observed synchronously. That is, when you call then(..) on a Promise, even if that Promise
+// was already resolved, the callback you provide to then(..) will always be called asynchronously
 // Immediatly fulfilled promise like
 // var p = new Promise(function (resolve, reject) {
 //     resolve(42);
 // }
-// can not be observed synchronously. That is we call then(...) on a promise.a
-// Primarly, this is a convert of whhether coe can introduce Zaglo - like KeyframeEffect, where smethings a task finishes synchronous and sometime asynchrounour.
 
 // Calling Too late:
 // Similarly until resolve or reject is not called, even though .then(...) is registed, It will not call the then(...) callback 
@@ -187,6 +201,12 @@
 // })
 
 // A B not B A 
+// We’ll cover this more later, but as you can see, p1 is resolved not
+// with an immediate value, but with another promise p3 , which is
+// itself resolved with the value "B" . The specified behavior is to
+// unwrap p3 into p1 , but asynchronously, so p1 ’s callback(s) are
+// behind p2 ’s callback(s) in the asynchronus Job queue (see “Jobs” on
+// page 23).
 
 // Never Calling the callback
 
@@ -215,11 +235,11 @@
 
 
 
-// Calling TO few and Too Many Time"
-// Promise only fet filfilled or reject once
+// Calling T few and Too Many Time"
+// Promise only filfilled or reject once
 
-// Failing to pass Alogn ant Parameter/Environment:
-// on reject or resolce, only first argument is confidered rest just ignored
+// Failing to pass Along ant Parameter/Environment:
+// on reject or resolve, only first argument is considered rest just ignored
 
 // Swallowing Errors and Exceptions:
 // var p = new Promise(function (resolve, reject) {
@@ -300,7 +320,7 @@
 
 // Chain Flow:
 // ** Every time we call then(...) on a Promise, it creates and return a new Promise, which can be chained with
-// ** Whatever value you return from then(...) call's fullfillment callback(the first parameter) is automatically et as the fulfillment of the chained Prmise.
+// ** Whatever value return from then(...) call's fullfillment callback(the first parameter) is automatically set as the fulfillment of the chained Pro mise.
 
 // var p = Promise.resolve(31)
 // p.then(
@@ -363,7 +383,7 @@
 //     )
 
 
-// ** If error handeler is not present in then then default handler is used like
+// ** If error handler is not present in then then default handler is used like
 // function(err) {
 //     throw err
 // }
@@ -374,7 +394,7 @@
 
 // Review intrinsic behaviour of promise chain:
 // then call against Promise automatically return a new promise.
-// Inside the fulfilled/rejection handlers, if tou return a calue or an exception is thrown, the new returned (chainable) Promise is resolved accordingly
+// Inside the fulfilled/rejection handlers, if you return a value or an exception is thrown, the new returned (chainable) Promise is resolved accordingly
 // If the fulfillment or rejection handler returns a Promise, it is unwrapped so that whatever its resolution is will become the resolution of the chained Promise returned from current chained promise
 
 // Promises normalizes asynchrony and encalsulate time dependent value state, and that is what lets us chhain them togther in this useful way.
@@ -390,17 +410,16 @@
 
 
 // var p1 = fetch('https://www.uuidtools.com/api/generate/v1');
-// // var p = Promise.resolve(32);
-
-// // p.then(
-// //     function fulfilled(val) {
-// //         console.log(val.toLowerCase());
-// //     }
-// // ).catch(
-// //     function handleError(err) {
-// //         console.log(err);
-// //     }
-// // )
+// var p = Promise.resolve(32);
+// p.then(
+//     function fulfilled(val) {
+//         console.log(val.toLowerCase());
+//     }
+// ).catch(
+//     function handleError(err) {
+//         console.log(err);
+//     }
+// )
 
 // var p = new Promise(function (resolve, rejected) {
 //     resolve(p1);
@@ -421,12 +440,12 @@
 
 
 
-
+// Static methods:
 // Promise.all()
 // It is use for when you want multiple promise are fulfilled not necessarly in some order but just fulfilled all.
-// accepts array of promises, thenables, or immediate values. 
+// Accepts array<iterable> of promises, thenables, or immediate values. 
 // if array is empty main promise fulfilled immediatly
-// Each value in the array us passed through Promse.resolve(...)
+// Each value in the array is passed through Promse.resolve(...)
 
 // if any promise reject then Promise.all rejects.
 
@@ -448,7 +467,7 @@
 
 
 // Promise.race(...)
-// Promise.all(...) coordinate multiple Promises concurrently and assumes all are need for fulfillment, sometimes you want to resond only tot he first
+// Promise.all(...) coordinate multiple Promises concurrently and assumes all are need for fulfillment, sometimes you want to resond only to the first
 // promise to cross the finish line and letting the other promises fall away
 
 // Acceps array of promisses, thenables or immediate value.
@@ -497,7 +516,7 @@
 // Second problem callbacks was async sequencial flow...
 // Now we turn our attention to expressing asynch flow control in sequencial looking fashion.
 
-// ES6 introduced new type of function that does not behaves run to completion nehaviour. This new type is caleed Generator.
+// ES6 introduced new type of function that does not behaves run to completion behaviour. This new type is called Generator.
 
 // Example:
 // var x = 1;
@@ -539,7 +558,7 @@
 // var res = it.next(6);
 // console.log(res); // {value: 30, done: true}
 
-// Message can go in booth direction
+// Message can go in both direction
 // Example:
 
 // function* foo(x) {
@@ -722,7 +741,7 @@
 
 // function* main() {
 //     try {
-//         var p = yield foo(); // ** look here; This is the solution for previously stated proble that callback is not squncial looking for asynchrony.
+//         var p = yield foo(); // ** look here; This is the solution for previously stated problem that callback is not squncial looking for asynchrony.
 //         console.log(p);
 //     } catch (err) {
 //         console.error(err);
@@ -739,7 +758,21 @@
 // See Iterating Generator Asynchronously code
 
 // Promise Aware Generator Runner like start eairlier:
+//function getPromise() {
+//     return fetch('https://www.uuidtools.com/api/generate/v1');
+// }
+
+// function* main() {
+//     try {
+//         var p = yield getPromise();
+//         console.log(p);
+//     } catch (err) {
+//         console.error(err);
+//     }
+// }
+
 // function run(gen) {
+//     debugger
 //     var args = [].slice.call(arguments, 1);
 
 //     var it = gen.apply(this, args);
@@ -765,6 +798,8 @@
 //             })(next);
 //         })
 // }
+
+// run(main);
 
 
 // ** ES async await syntax:

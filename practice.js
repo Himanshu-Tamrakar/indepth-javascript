@@ -1,40 +1,43 @@
 'use strict';
-
-var person = {
-    isHuman: false,
-    introduce: function () {
-        console.log(`My name is ${this.name}, Am i human?: ${this.isHuman}`);
-    }
-}
+var p = new Promise((resolve) => setTimeout(() => resolve('1'), 0))
+Promise.resolve(p).then(function fullfilled(params) {
+    console.log(params);
+})
 
 
-var me = Object.create(person, {
-    name: {
-        value: 'Himanshu Tamrakar',
-        enumerable: true,
-        writable: true,
-        configurable: true
-    },
-    isHuman: {
-        value: true
-    }
-});
 
-console.log('Hey', me);
-console.log(me.isHuman);
-console.log(me.introduce());
+Promise.resolve(2).then(function fullfilled(params) {
+    console.log(params);
+})
 
-var oco = Object.create({});   // create a normal object
-var ocn = Object.create(null);
 
-console.log(oco, ocn);
 
-var ob = {}; ob.po = oco; ob.pn = ocn;
+// function run(gen) {
+//     debugger
+//     var args = [].slice.call(arguments, 1);
 
-function ShowProperties(obj) {
-    for (var prop in obj) {
-        console.log(prop + ": " + obj[prop] + "\n");
-    }
-}
+//     var it = gen.apply(this, args);
 
-ShowProperties(ob)
+//     return Promise.resolve()
+//         .then(function handleNext(value) {
+//             var next = it.next(value);
+
+//             return (function handleResult() {
+//                 debugger
+//                 if (next.done) {
+//                     return next.value;
+//                 } else {
+//                     return Promise.resolve(next.value)
+//                         .then(
+//                             handleNext,
+//                             function handleError(err) {
+//                                 return Promise.resolve(it.throw())
+//                                     .then(handleResult);
+//                             }
+//                         )
+//                 }
+//             })(next);
+//         })
+// }
+
+// run(main);
