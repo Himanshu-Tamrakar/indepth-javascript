@@ -1,4 +1,85 @@
-// tag function:
+// Chapter 1:
+// **Transpiling (transformation + compiling). Roughly, the idea is to use a special tool to transform your ES6 code into equivalent 
+// (or close!) matches that work in ES5 environments
+// For example, consider shorthand property definitions(see “Object Literal Extensions” on page 38 in Chapter 2).Here’s the ES6 form:
+// var foo = [1, 2, 3];
+// var obj = {
+//     foo
+//     // means `foo: foo`
+// };
+// obj.foo;
+// // [1,2,3]
+// // But(roughly) here’s how that transpiles:
+// var foo = [1, 2, 3];
+// var obj = {
+//     foo: foo
+// };
+// obj.foo;
+// // [1,2,3]
+
+// ** Shims/Polyfills
+// Not all new ES6 features need a transpiler. Polyfills (aka shims) are a pattern for defining equivalent behavior from a newer environment
+// into an older environment, when possible. Syntax cannot be polyfilled, but APIs often can be.
+// For example, Object.is(..) is a new utility for checking strict equality of two values but without the nuanced exceptions that ===
+// has for NaN and -0 values. The polyfill for Object.is(..) is pretty easy:
+// if (!Object.is) {
+//     Object.is = function (v1, v2) {
+//         // test for `-0`
+//         if (v1 === 0 && v2 === 0) {
+//             return 1 / v1 === 1 / v2;
+//         }
+//         // test for `NaN`
+//         if (v1 !== v1) {
+//             return v2 !== v2;
+//         }
+//         // everything else
+//         return v1 === v2;
+//     };
+// }
+
+// Chapter 2:
+// function declaration, var, let, const, function expressions scope, hoisting rule
+//  spread/rest operator
+// Default parameter value: default parameter create its own scope in ()
+// destructuring
+var o1 = {a: 1, b: 2, c: 3};
+var o2 = {};
+({a: o2.a, b: o2.b, c: o2.c} = o1);
+console.log(o2);
+
+// can convert array t Object, Object to array, change value position in array 
+var obj1 = {a: {x: 1}};
+
+var {a: {x: X}} = obj1;
+console.log(X);
+
+
+// Object Literal Extension:
+// So what are we left to conclude about concise methods? They’reshort and sweet, and a nice convenience. But you should only use
+// them if you’re never going to need them to do recursion or eventbinding/unbinding. Otherwise, stick to your old-school something:
+// function something(..) method definitions.
+// var btn = document.querySelector('button');
+// var obj = {
+//     something: function something(o) {
+//         var x = Math.random(),
+//             y = Math.random();
+
+//         if (x < y) {
+//             return something(y, x);
+//         }
+//         console.table(x, y, x - y);
+//         return x - y;
+//     }
+// }
+// btn.addEventListener('click', obj.something);
+
+// super:
+// got o prototype and call the function, prototype is super 
+
+// Interpolation:
+// String literal tag function
+//  arg strings = spliy by ${...}
+// arg ...values = all the ${...} values
 function dollabillsyall(strings, ...values) {
 
     console.log(strings.raw);
@@ -26,6 +107,8 @@ var text = dollabillsyall
     `Thanks for your purchase, ${firstName}! Your product cost was ${amt1}, which with tax comes out to ${amt2}`;
 console.log(text);
 
+
+
 // raw value in tag function strings argument:
 function showraw(strings, ...values) {
     console.log(strings);
@@ -42,13 +125,22 @@ console.log('%c -------------------------- ', 'background: #b3bac5; color: #bada
 // uses closest lexical this, no dynamic this,
 // uses closest loxical arguments and super and new.target.
 
-// for...of:
-// loops over set of values produces by iterator.
-// The value used to loop over for...of must be iterable or it must be value that can be coearsed/boxed to object that is iterable.
+// for..of Loops:
+// Joining the for and for..in loops from the JavaScript we’re all familiar with, ES6 adds a for..of loop, which loops over the set of
+// values produced by an iterator. The value you loop over with for..of must be an iterable, or it must
+// be a value that can be coerced/boxed to an object (see the Types & for..of Loops Grammar title of this series) that is an iterable. 
+// An iterable is simply an object that is able to produce an iterator, which the loop then uses.
+// Best example
+var o = {};
+for (o.a of [1, 2, 3]) {
+    console.log(o.a);
+}
+// 1 2 3
+for ({x: o.a} of [{x: 1}, {x: 2}, {x: 3}]) {
+    console.log(o.a);
+}
 
-// for...of loops over values produced by NodeIterator
 // for...in loops ovre keys
-
 // var a = [11, 22, 33, 44, 55, 66];
 // for (const val of a) {
 //     console.log(val);
@@ -77,6 +169,7 @@ console.log('%c -------------------------- ', 'background: #b3bac5; color: #bada
 // Typed Arrays/Collections
 
 // Plain object are not iterable that is why we can not for...of. but we can create iterator in that function 
+
 
 // Boxing to String
 // for (const v of "object") {
@@ -129,11 +222,11 @@ console.log('%c -------------------------- ', 'background: #b3bac5; color: #bada
 
 
 // Unicode-Aware String Operation:
-// By default Js string operations and methods are ot sensitive to astral symbols in string values. So they treat each BMP
+// By default Js string operations and methods are not sensitive to astral symbols in string values. So they treat each BMP
 // charector individually, even the two surrogate halves that make up an otherwise single astral charector.
 // Page Seven5
 
-// Charector Posotioning:
+// Charector Positioning:
 // Pre ES6 charAt method not respect the atomicuity of astral charactor not will it take account combiniing marks
 
 // see at book
@@ -144,7 +237,7 @@ console.log('%c -------------------------- ', 'background: #b3bac5; color: #bada
 // Symbols:
 // New ES6 premitive type that does not have literal version for writting
 
-// We should ot use Symbol with new 
+// We should not use Symbol with new 
 // parameter is opitonal
 // typeof is "symbol"
 
@@ -159,13 +252,34 @@ console.log('%c -------------------------- ', 'background: #b3bac5; color: #bada
 // smbObj = Object(smb);
 // smbObj instanceof Symbol; //true
 
-// Main reason to create symbol to is to create string-like value that can not collied with othat value
+// Main reason to create symbol to is to create string-like value that can not collied with other value
 // const EVT_LOGIN = Symbol("event.login");
 // this value can not be duplicated.
 
 
-// Chapter 3:
+// ** Chapter 3:
 // Iterator:
+// Interator Interface:
+// Iterator[required]
+//     next() {method}: retrieves next IteratorResult
+
+// There are two optional members that some iterators are extended with:
+// Iterator [optional]
+//     return() {method}: stops iterator and returns IteratorResult
+//     throw() {method}: signals error and returns IteratorResult
+
+// The IteratorResult interface is specified as:
+// IteratorResult
+//     value {property}: current iteration value or final return value (optional if `undefined`)
+//     done {property}: boolean, indicates completion status
+// -----
+// There’s also an Iterable interface, which describes objects that must
+// be able to produce iterators:
+// Iterable
+// @@iterator() {method}: produces an Iterator
+// If you recall from “Built-In Symbols” @@iterator is the special built-in symbol representing the method
+// that can produce iterator(s) for the object
+
 
 // var Fir = {
 //     [Symbol.iterator]: function () {return this;},
@@ -177,6 +291,8 @@ console.log('%c -------------------------- ', 'background: #b3bac5; color: #bada
 //     }
 // }
 
+
+
 // var i = 0;
 // for (const iterator of Fir) {
 //     console.log(iterator);
@@ -184,7 +300,7 @@ console.log('%c -------------------------- ', 'background: #b3bac5; color: #bada
 //     else i++;
 // }
 
-// Custom Iterator:
+// Custom Itrable:
 // var Fib = {
 //     [Symbol.iterator]: function () {
 //         var n1 = 1, n2 = 2;
@@ -313,3 +429,117 @@ console.log('%c -------------------------- ', 'background: #b3bac5; color: #bada
 // var [z, ...w] = it; // rest opearator
 // console.log(it.next());
 // console.log(x, y, z, w);
+
+
+// Generator:
+// Module:
+// ** Class
+// .call() with class keyward does not work 
+// Class does not hoisted
+// class Foo in the top global scope creates a lexical Foo identifier in that scope, but unlike function Foo does not create a global object property of that name.
+
+class Foo {
+    constructor (a, b) {
+        this.x = a;
+        this.y = b;
+    }
+    gimmeXY() {
+        return this.x * this.y;
+    }
+}
+
+class Bar extends Foo {
+    constructor (a, b, c) {
+        super(a, b);
+        this.z = c;
+    }
+    gimmeXYZ() {
+        return super.gimmeXY() * this.z;
+    }
+}
+
+var obj = new Bar(1, 2, 3);
+console.log(obj);
+// It is like,
+// Bar.prototype = Object.create(Foo.prototype);
+// Bar.prototype.constructor = Bar;
+// Bar.prototype.gimmeXYZ = ...
+
+// ** new.target
+// new.target is a new “magical” value available in all functions, though in normal functions it will always be undefined . In any con‐
+// structor, new.target always points at the constructor that new actually directly invoked, even if the constructor is in a parent class
+// and was delegated to by a super(..) call from a child constructor.Consider:
+
+class Foo {
+    constructor () {
+        console.log("Foo: ", new.target.name);
+    }
+}
+class Bar extends Foo {
+    constructor () {
+        super();
+        console.log("Bar: ", new.target.name);
+    }
+    baz() {
+        console.log("baz: ", new.target);
+    }
+}
+var a = new Foo(); // Foo: Foo
+var b = new Bar();
+// Foo: Bar < --respects the `new` call-site
+// Bar: Bar
+b.baz(); // baz: undefined
+
+// * If new.target is undefined , you know the function was not called with new . You can then force a new invocation if that’s necessary.
+
+
+
+// ** static
+// static members wento .constructor inside protptype object 
+
+class Foo {
+    static cool() {console.log("cool");}
+    wow() {console.log("wow");}
+}
+class Bar extends Foo {
+    static awesome() {
+        super.cool();
+        console.log("awesome");
+    }
+    neat() {
+        super.wow();
+        console.log("neat");
+    }
+}
+Foo.cool(); // "cool"
+Bar.cool(); // "cool"
+Bar.awesome(); // "cool"
+// 'awesome
+var b = new Bar();
+b.neat(); // "wow"
+// "neat"
+b.awesome; // undefined
+b.cool;// undefined
+
+
+// ** Chapter 4:
+// Callbacks, (Inversion of control, synchronous looking code for async code)
+// promises(Solves trust issue(inversion of control)),
+// Generators (Solce sync looking code of an async code)
+// Promise + Generator (Best)
+// async/await
+
+// ** Chapter 5:
+// Collections
+// TypedArray: 
+// Map, set, get, has, values, keys, entries, delete, iterator,
+// Set, has, add, values, keys, entries, delete, iterator
+
+// ** Chapter: 6
+// Array
+// Object
+// Math
+// Number
+// String
+
+// ** Chapter 7

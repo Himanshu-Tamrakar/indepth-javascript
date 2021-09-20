@@ -872,7 +872,7 @@ Object.setPrototypeOf(myObject, anotherObject);
 // b1.speak();
 
 
-// Both the linking is exactyl same
+// Both the linking is exactly same
 // We have greatly simplified all the stuff(like no confusing .contructor or .prototype) in OLOO that are going on OO model
 // because we are just linking objects to each other without needing all the cruft and confusion of things that look 
 // like(but dont behave) clases, with constructor and prototypes and new calls
@@ -1019,3 +1019,7 @@ $(document).ready(function () {
     btn2.setup('200', '50', 'World2')
     btn2.build($body);
 })
+
+
+/////
+// ** super is not bound dynamically. It’s bound sort of “statically” at declaration time. No big deal, right?
