@@ -6,12 +6,124 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>chapter1</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'> -->
     <script src='chapter1.js'></script>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        #blue {
+            height: 100px;
+            width: 100px;
+            background-color: blue;
+            border: 10px solid gray;
+            padding: 25px;
+            margin: 25px;
+        }
+
+        #red {
+            height: 50px;
+            width: 50px;
+            background-color: red;
+            border: 10px solid gray;
+        }
+
+    </style>
 </head>
 
 <body>
-    <div>Hey there</div>
+
+    <form name="orderForm" action="#" method="post">
+        <select name="heatIndex" required>
+            <option>Mild</option>
+            <option>Medium</option>
+            <option>Spicy</option>
+        </select>
+    </form>
+
+    <script>
+        var form = document.forms['orderForm'].heatIndex;
+        document.addEventListener('change', function () {
+            console.log(form.value);
+        })
+    </script>
+
+    <div id="blue">
+        <div id="red"></div>
+    </div>
+
+    <p>Hi, <strong>cody</strong></p>
+
+
+    <script>
+        // var div = document.querySelector('#red');
+        // console.log(div.offsetLeft); //logs 60
+        // console.log(div.offsetTop); //logs 60
+        // console.log(div.offsetParent); //logs <body>
+    </script>
+
+    <script>
+        // var para = document.querySelector('p');
+        // console.log(para.textContent);
+        // console.log(para.firstChild.data);
+        // console.log(para.firstChild.nodeValue);
+        // console.log(para.nodeValue);
+    </script>
+
+
+
+    <div class='a b c s e-e'>Hey<span>there</span></div>
+    <div><input type="text"></div>
+
+
+    <div>
+        <p>Para</p>
+
+    </div>
+
+
+
+    <script>
+        // var div = document.querySelector('div');
+        // var divClasList = div.classList;
+        // console.log(divClasList);
+
+        // divClasList.add('f');
+        // divClasList.toggle('a')
+        // console.log(divClasList);
+
+        // console.log(div.innerHTML);
+        // console.log(div.innerText);
+
+        // console.log(div.textContent);
+    </script>
+
+    <p id="p1">Go big Blue Blue</p>
+    <script>
+        var text = document.querySelector('body>p#p1').firstChild.nodeValue;
+
+        var newHtml = text.replace(text.substring(3, 6), '<span style="color: red; font-weight: 32">HELLO</span>')
+
+        document.querySelector('body>p#p1').innerHTML = '';
+        document.querySelector('body>p#p1').innerHTML = newHtml;
+
+    </script>
+
+    <ul>
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+    </ul>
+
+    <script>
+        var elem = document.querySelector('body>ul>li:nth-child(2)')
+        console.log(elem);
+
+        var li = document.createElement('li');
+        li.innerText = 'HIYO'
+        elem.append(li);
+    </script>
 </body>
 
 </html>

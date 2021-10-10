@@ -60,7 +60,7 @@
 //         // foo.call(foo, i) // This will work
 //     }
 // }
-// console.log(foo.count); // no strict mode it will be 0 only
+// console.log(foo.count); // in 'no strict mode' it will be 0 only
 
 
 // 2. This is not its scope 
@@ -502,10 +502,10 @@
 // console.log(myObject.hasOwnProperty('a')); // true
 // console.log(myObject.hasOwnProperty('b')); // false
 
-// // in operator check in the property as well as in [[Prototype]] chain as well 
-// // hasOwnProperty checks in only object not in [[Prototype]] chain
+// in operator check in the property as well as in [[Prototype]] chain as well 
+// hasOwnProperty checks in only object not in [[Prototype]] chain
 
-// // It is possible  to create object that does not have prototype chain vai Object.create(null) in that case use 
+// It is possible  to create object that does not have prototype chain vai Object.create(null) in that case use 
 // Object.prototype.hasOwnProperty.call(myObject, 'a');
 
 
@@ -551,10 +551,10 @@
 // Shadowing Example: 
 // Shadow means creating the same name property even though same property present in highter level in prototype chain
 // 1.  If property present in current object then it will just update the value is writtable is true
-// 2.  If property presetn in both current and [[prototypechain]] then just shadowing if [[prototype]] property writable: true or false does not matter
+// 2.  If property present in both current and [[prototypechain]] then just shadowing if [[prototype]] property writable: true or false does not matter
 // 3.  If property not present in current object but available in [[prototype]] then three case
 // 3.a If [[prototype]] chain contains property but it is mark as wriable as false then will not shadow 
-// 3.b If [[prototype]] chain contains property but it is mark as wriable as true then wil shadow 
+// 3.b If [[prototype]] chain contains property but it is mark as wriable as true then will shadow 
 // 3.c [[prototype]] chain contains the property but it is setter then shodow not allowed
 
 // var anotherObject = {
@@ -699,7 +699,7 @@
 // a instanceof Foo // true
 
 
-// We can inquire only acsestery but let suppose we have two object a, b ans want to find out if objects are related to each other prototype chain?
+// We can inquire only acsestery but let suppose we have two object a, b and want to find out if objects are related to each other prototype chain?
 // function isRelated(o1, o2) {
 //     function F() { }
 
@@ -798,7 +798,7 @@
 // Chapter 6:
 // we have to think different from class/inheritance design pattern to delegation design pattern 
 // In class we happily use polymorphism but having the same name method to parent and in child class but
-// In OLOO(Object link to other object design delegation) we try to avoid the polymorphism ascutlly its all shadowing
+// In OLOO(Object link to other object design delegation) we try to avoid the polymorphism actually its all shadowing
 // Delegation is very powerfull design pattern very distinct from patent child class machansm
 
 // Object.create(..) creates a new object ( bar ) linked to the object we

@@ -228,7 +228,7 @@
 
 // const theGlobalScopeObject =
 //     (typeof globalThis != 'undefined') ? globalThis : //
-//         (typeof global != 'undefined') ? global :     // 
+//         (typeof global != 'undefined') ? global :     // For node
 //             (typeof window != 'undefined') ? window : // For browser
 //                 (typeof self != 'undefined') ? self : // web workser
 //                     (new Function("return this"))();  //

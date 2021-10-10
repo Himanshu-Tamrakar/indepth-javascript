@@ -87,8 +87,8 @@ b3 < c3 // true both are string helce comparing lexicographically
 
 /** -------------- */
 
-// If we are trying to access a variable that hasnot been decleared, you will end up creating a variable in the top level 
-// globale scope or getting an error depending upon 'strict mode'
+// If we are trying to access a variable that hasnot been decleared, you will end up creating a variable in the globale scope or 
+// getting an error depending upon 'strict mode'
 
 
 a4 = 19; // in 'use strict' it is an error otherwise it will create property in window
