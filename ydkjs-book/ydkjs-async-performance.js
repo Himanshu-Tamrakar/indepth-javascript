@@ -30,7 +30,7 @@
 
 //*Parallel Threading:
 // It’s very common to conflate the terms “async” and “parallel,” but they are actually quite different. Remember, async is about the gap
-// between now and later. But parallel is about things being able tooccur simultaneously
+// between now and later. But parallel is about things being able to occur simultaneously
 
 // Javascript is single threaded behaviour
 
@@ -53,8 +53,8 @@
 // *As of ES6, there's a new concept layered on the top of event loop queue called the job queue. the most likely exposure you will have to 
 // it is with the asynchronous behaviour of Promise. 
 
-// The event look is like amusement park ride. one you finish the ride you have to go to the end of the line to take ride again.again
-// where the jobs queue s finishing the ride and cutting the line and getting right back on
+// The event loop is like amusement park ride. one you finish the ride you have to go to the end of the line to take ride again and again
+// where the jobs queues finishing the ride and cutting the line and getting right back on
 
 // A job can also cause more jobs to add jobs end of the same queue and that could spin infinetly. thus starving the program of the ability
 // to ove on to the next event loop tick.
@@ -64,16 +64,16 @@
 // Js engine reorder the statements for optimization purpose without effecting result
 
 // Review:
-// ** Whenever there are events to run, the event loop runs until the queue is empty. Each iteration of the event loop is a tic-k. User inter‐
+// ** Whenever there are events to run, the event loop runs until the queue is empty. Each iteration of the event loop is a tick. User inter‐
 // action, IO, and timers enqueue events on the event queue.At any given moment, only one event can be processed from the 
-// queue at a time. While an event is executing, it can directly or indi‐rectly cause one or more subsequent events.
+// queue at a time. While an event is executing, it can directly or indirectly cause one or more subsequent events.
 
 
 
 // Chapter 2:
 // Callbacks are fundamental unit of asynchrony in JS but they are not enough land scape of async programming as JS matures.
 
-// First out brains plan things out in sequencial, blocking, single threded sentic ways but callbacks express asynchronous flow in a 
+// First our brains plan things out in sequencial, blocking, single threded sentic ways but callbacks express asynchronous flow in a 
 // rather non linear, non sequencial, way whick makes reasoning properly about such code much harder. Hard to reason code is bad code.
 
 // We need a way to express asynchrony in a more synchronous, sequencial, blocking, manner, just like out brain do.
@@ -81,7 +81,7 @@
 // Second callback suffer inversion of control(trust issue) give control to other programe.callback
 
 //  ad hoc logic to solve trust issue is possible but its more difficult than it should be and it produces code that is clunkier, 
-// harder to maintain, and likily issuffient protected from these hazzareds
+// harder to maintain, and likely issuffient protected from these hazzareds
 
 // We need generalized solution for all the trust issues
 
@@ -149,7 +149,7 @@
 
 // Any object can have then method, that can look like a promise,
 
-// The general term fot type checks that make assumptions about a value's type based on its shape(what properties are present) is called duck typing.
+// The general term for type checks that make assumptions about a value's type based on its shape(what properties are present) is called duck typing.
 
 // if (
 //     p !== null &&
@@ -238,7 +238,7 @@
 // Calling T few and Too Many Time"
 // Promise only filfilled or reject once
 
-// Failing to pass Along ant Parameter/Environment:
+// Failing to pass Along and Parameter/Environment:
 // on reject or resolve, only first argument is considered rest just ignored
 
 // Swallowing Errors and Exceptions:
@@ -255,7 +255,7 @@
 //         console.log('Error', error); // This run because foo.bar() gives reference error
 //     }
 // )
-// Another Zalgo solved, promise even make errors(Exceptions) into asynchroouns behaviour.
+// Another Zalgo solved, promise even make errors(Exceptions) into asynchronous behaviour.
 
 
 
@@ -271,7 +271,7 @@
 // var p2 = Promise.resolve(p1);
 // p1 == p2; // true
 
-// ** Even more importantly, if you pass a non Promise thenable value to Promse.resolve(...), it will attempt to uwrap theat value and the unwrapping 
+// ** Even more importantly, if you pass a non Promise thenable value to Promse.resolve(...), it will attempt to uwrap that value and the unwrapping 
 // ** will keep going until a concreate final non promise like value is extracted
 
 // var p = {
@@ -320,7 +320,7 @@
 
 // Chain Flow:
 // ** Every time we call then(...) on a Promise, it creates and return a new Promise, which can be chained with
-// ** Whatever value return from then(...) call's fullfillment callback(the first parameter) is automatically set as the fulfillment of the chained Pro mise.
+// ** Whatever value return from then(...) call's fullfillment callback(the first parameter) is automatically set as the fulfillment of the chained Promise.
 
 // var p = Promise.resolve(31)
 // p.then(
@@ -387,7 +387,7 @@
 // function(err) {
 //     throw err
 // }
-// ** Same if fulfilled handler is not present then default ahndler is use like
+// ** Same if fulfilled handler is not present then default hhandler is use like
 // function(v) {
 //     return v;
 // }

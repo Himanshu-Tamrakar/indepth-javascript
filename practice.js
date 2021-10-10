@@ -1,11 +1,32 @@
 'use strict';
-var a = {
-    valueOf: function () {
-        return "42";
-    }
-}
-console.log(a - 10); // 4210
+var p3 = new Promise(function (resolve, reject) {
+    resolve('B');
+})
 
+var p1 = new Promise(function (resolve, reject) {
+    resolve(p3);
+})
+
+var p2 = new Promise(function (resolve, reject) {
+    resolve("A");
+})
+
+p1.then(function (res) {
+    console.log(res);
+})
+
+p2.then(function (res) {
+    console.log(res);
+})
+
+
+p1.then(function (res) {
+    console.log(res);
+})
+
+p2.then(function (res) {
+    console.log(res);
+})
 
 // ask();
 
