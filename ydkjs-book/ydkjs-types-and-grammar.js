@@ -27,7 +27,7 @@ typeof [1, 2, 3] === 'object' //true
 // typeof a; // 'undefined'
 // console.log(b); // Reference error: b is not defined but
 // typeof b // 'undefined' not declared
-// // typeof is very usefull
+// typeof is very usefull
 
 // function doSomething() {
 //     var helper = (typeof FeatureXYZ !== 'undefined') ? FeatureXYZ : function() {};
@@ -74,7 +74,7 @@ typeof [1, 2, 3] === 'object' //true
 //  like indexOf, concat, forEach etc...
 
 
-// DOM query return list of elems that are not array but arraly like structure ex. // document.querySelectorAll()
+// DOM query return list of elems that are not array but array like structure ex. // document.querySelectorAll()
 // argumants in function are array like structure but not a actual array
 
 // function foo() {
@@ -119,7 +119,7 @@ typeof [1, 2, 3] === 'object' //true
 // var a = 5000000000000000000000; // 5e21
 
 // var a = 42.59;
-// a.toFixed(0) //42;
+// a.toFixed(0) //43;
 // a.toFixed(1) // 42.6
 // a.toFixed(2) // 42.59
 // a.toFixed(3) // 42.590
@@ -257,7 +257,7 @@ console.log(void a, a); // undefined 42
 
 // Array:
 // new Array(3); becomes lenth of three with empty slots 
-// empty slots are not undefined may it seems as undefined but not purly
+// empty slots are not undefined may it seems as undefined but not purly undefined
 
 // new Array([1,2,3]); will create actual array with value 
 
@@ -282,7 +282,7 @@ console.log(void a, a); // undefined 42
 
 // Symbols:
 // Symbol is primitive value added in ES6
-// Symbols are special unique(not strictly guaranteed) values that can be used as properties on objects with lettle fear of collision
+// Symbols are special unique(not strictly guaranteed) values that can be used as properties on objects with little fear of collision
 
 // Prototype;
 // Function Prototype is a Function
@@ -321,7 +321,7 @@ console.log(void a, a); // undefined 42
 // e.toString(); // "function () { }"
 
 // JSON Stringyfication:
-// For simple value JSON.stringyfy is same as toString except it always string it 
+// For simple value JSON.stringyfy is same as toString except it always stringify it 
 // JSON.stringify("23"); // ""23""
 // JSON.stringify(true); // "true"
 
@@ -462,8 +462,8 @@ var d = Boolean(a && b && c); // true;
 0 | NaN // 0
 0 | Infinity // 0
 0 | -Infinity // 0
-// As in JS number are 64 bits so with bitwise operator Js first convert it to 32 nteger so it becomes 0
-// ** The ~ operator first “coerces” to a 32-bit number value, and then performs a bitwise negation (flip‐ ping each bit’s parity).
+// As in JS number are 64 bits so with bitwise operator Js first convert it to 32 integer so it becomes 0
+// ** The ~ operator first “coerces” to a 32-bit number value, and then performs a bitwise negation (flipping each bit’s parity).
 // ** ~x is roughly the same as -(x+1)
 // var fN = 'Hello World';
 //* ~fN.indexOf('ol') => 0 falsy because ~x = -(x+1) => -(-1+1) => 0 => falsy
@@ -492,7 +492,7 @@ var d = Boolean(a && b && c); // true;
 // parseInt(a); // 42
 
 // Number.parseInt([1,2,3]); // first string [1,2,3] => "1,2,3" then to Number => 1
-// parseIn take second argument as base.
+// parseInt take second argument as base.
 
 
 // Explicite Boolean:

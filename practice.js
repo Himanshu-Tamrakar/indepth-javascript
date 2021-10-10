@@ -1,71 +1,11 @@
 'use strict';
-function Foo() {
+var a = {
+    valueOf: function () {
+        return "42";
+    }
 }
-Foo.prototype.firstName = 'Himanshu Tamrakar';
-var a = new Foo();
+console.log(a - 10); // 4210
 
-function Bar() {
-
-}
-
-Bar.prototype = {};
-var b = new Bar();
-
-console.log(a, b);
-
-// function Student() {
-
-// }
-
-// Student.prototype.firstName = 'Himanshu';
-
-// var obj = new Student();
-
-
-// // obj.firstName = 'Tamrakar';
-// console.log(obj);
-
-// Object.defineProperty(Student.prototype, 'firstName', {
-//     writable: false
-// })
-
-// console.log(Object.getOwnPropertyDescriptor(Student.prototype, 'firstName'));
-// obj.firstName = 'Tamrakar1';
-// console.log(obj);
-// function doSomething(id, name) {
-//     var fisrtName = 'Himanshu';
-//     function doSomething1() {
-//         console.log(this);
-//     }
-//     return doSomething1;
-// }
-
-// var returnFromDoSomething = doSomething();
-
-// function doSomething2() {
-//     var firstName = 'Tamrakar';
-//     returnFromDoSomething.call(firstName);
-// }
-// doSomething2();
-
-// if (true) {
-//     function ask() {
-//         console.log('Am I called?');
-//     }
-// }
-
-// if (true) {
-//     function ask() {
-//         console.log('Or What about me?');
-//     }
-// }
-
-// for (let i = 0; i < 5; i++) {
-//     function aks() {
-//         console.log('Or is it one of these?');
-//     }
-
-// }
 
 // ask();
 
