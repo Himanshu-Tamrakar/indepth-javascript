@@ -1,32 +1,31 @@
 'use strict';
-var p3 = new Promise(function (resolve, reject) {
-    resolve('B');
-})
 
-var p1 = new Promise(function (resolve, reject) {
-    resolve(p3);
-})
-
-var p2 = new Promise(function (resolve, reject) {
-    resolve("A");
-})
-
-p1.then(function (res) {
-    console.log(res);
-})
-
-p2.then(function (res) {
-    console.log(res);
-})
-
-
-p1.then(function (res) {
-    console.log(res);
-})
-
-p2.then(function (res) {
-    console.log(res);
-})
+class Foo {
+    static cool() {console.log("cool");}
+    wow() {console.log("wow");}
+}
+class Bar extends Foo {
+    static awesome() {
+        super.cool();
+        console.log("awesome");
+    }
+    neat() {
+        super.wow();
+        // super.cool(); // Error
+        console.log("neat");
+    }
+}
+Foo.cool(); // "cool"
+Bar.cool(); // "cool"
+Bar.awesome();
+// "cool"
+// 'awesome
+var b = new Bar();
+b.neat();
+// "wow"
+// "neat"
+b.awesome; // undefined
+b.cool;// undefined
 
 // ask();
 

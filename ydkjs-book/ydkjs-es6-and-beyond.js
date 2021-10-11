@@ -55,8 +55,8 @@ console.log(X);
 
 
 // Object Literal Extension:
-// So what are we left to conclude about concise methods? They’reshort and sweet, and a nice convenience. But you should only use
-// them if you’re never going to need them to do recursion or eventbinding/unbinding. Otherwise, stick to your old-school something:
+// So what are we left to conclude about concise methods? They’re short and sweet, and a nice convenience. But you should only use
+// them if you’re never going to need them to do recursion or eventbinding/unbinding. Otherwise, stick to your old-school function declaration:
 // function something(..) method definitions.
 // var btn = document.querySelector('button');
 // var obj = {
@@ -74,11 +74,13 @@ console.log(X);
 // btn.addEventListener('click', obj.something);
 
 // super:
-// got o prototype and call the function, prototype is super 
+// *** super is only allowed in concise methods, not regular function expression properties. 
+// *** It also is only allowed in super.XXX form (for property / method access), not in super() form.
+// *** got o prototype and call the function, prototype is super 
 
 // Interpolation:
 // String literal tag function
-//  arg strings = spliy by ${...}
+// arg strings = spliy by ${...}
 // arg ...values = all the ${...} values
 function dollabillsyall(strings, ...values) {
 
@@ -123,12 +125,12 @@ console.log('%c -------------------------- ', 'background: #b3bac5; color: #bada
 // Arrow Function:
 // Shorter sysntax, good for one line body,
 // uses closest lexical this, no dynamic this,
-// uses closest loxical arguments and super and new.target.
+// uses closest lexical arguments and super and new.target.
 
 // for..of Loops:
 // Joining the for and for..in loops from the JavaScript we’re all familiar with, ES6 adds a for..of loop, which loops over the set of
 // values produced by an iterator. The value you loop over with for..of must be an iterable, or it must
-// be a value that can be coerced/boxed to an object (see the Types & for..of Loops Grammar title of this series) that is an iterable. 
+// be a value that can be coerced/boxed to an object (see the Types & for..of Loops Grammer title of this series) that is an iterable. 
 // An iterable is simply an object that is able to produce an iterator, which the loop then uses.
 // Best example
 var o = {};
@@ -140,7 +142,7 @@ for ({x: o.a} of [{x: 1}, {x: 2}, {x: 3}]) {
     console.log(o.a);
 }
 
-// for...in loops ovre keys
+// for...in loops over keys: return own and prototype enumarable properties as well
 // var a = [11, 22, 33, 44, 55, 66];
 // for (const val of a) {
 //     console.log(val);
@@ -152,7 +154,7 @@ for ({x: o.a} of [{x: 1}, {x: 2}, {x: 3}]) {
 // }
 
 // // pre ES6:
-// var k = Object.keys(a);
+// var k = Object.keys(a); // return own keys only
 // for (let val, i = 0; i < k.length; i++) {
 //     console.log(a[k[i]]);
 // }
@@ -183,14 +185,14 @@ for ({x: o.a} of [{x: 1}, {x: 2}, {x: 3}]) {
 //     oct = 052,
 //     hex = 0x2a;
 
-// // Specifying number in different base. all three are 42 in dec
-// // 052 was non standard. so it is restricted in strict mode 
-// // octal varsion is not allowed in strict mode
+// Specifying number in different base. all these are 42 in decimal
+// 052 was non standard. so it is restricted in strict mode 
+// octal varsion is not allowed in strict mode
 // Number("42"); // 42
 // Number("052"); // 52
 // Number("0x2a"); // 42
 
-// // Standarized form in ES6 for decimal. octal. hexdecimal valuesa are:
+// Standarized form in ES6 for decimal. octal. hexdecimal valuesa are:
 
 // var dec1 = 42, // 42
 //     oct1 = 0o52, // 42
@@ -227,10 +229,10 @@ for ({x: o.a} of [{x: 1}, {x: 2}, {x: 3}]) {
 // Page Seven5
 
 // Charector Positioning:
-// Pre ES6 charAt method not respect the atomicuity of astral charactor not will it take account combiniing marks
+// Pre ES6 charAt method not respect the atomicity of astral charactor not will it take account combiniing marks
 
 // see at book
-// ES6 aswell does not give astral unicode aware method  
+// ES6 as well does not give astral unicode aware method  
 // Hack is use normalize method
 // [...s1.normalizw()]
 
@@ -420,16 +422,17 @@ for ({x: o.a} of [{x: 1}, {x: 2}, {x: 3}]) {
 // ** Destructure can use iterator
 // ** spread can use iterator
 
+
 // var a = [1, 2, 3, 4, 5];
-
 // var b = [0, ...a, 6];
-
 // var it = a[Symbol.iterator]();
 // var [x, y] = it; // destrcutor operator
 // var [z, ...w] = it; // rest opearator
 // console.log(it.next());
-// console.log(x, y, z, w);
-
+// console.log(x); // 1
+// console.log(y); // 2
+// console.log(z); // 3
+// console.log(w); // [4,5]
 
 // Generator:
 // Module:
@@ -474,6 +477,9 @@ class Foo {
     constructor () {
         console.log("Foo: ", new.target.name);
     }
+    baz() {
+        console.log('Foo:: baz', new.target);
+    }
 }
 class Bar extends Foo {
     constructor () {
@@ -481,6 +487,7 @@ class Bar extends Foo {
         console.log("Bar: ", new.target.name);
     }
     baz() {
+        super.baz()
         console.log("baz: ", new.target);
     }
 }
@@ -488,14 +495,15 @@ var a = new Foo(); // Foo: Foo
 var b = new Bar();
 // Foo: Bar < --respects the `new` call-site
 // Bar: Bar
-b.baz(); // baz: undefined
+b.baz();
+// Foo::baz undefined
+// baz: undefined
 
-// * If new.target is undefined , you know the function was not called with new . You can then force a new invocation if that’s necessary.
-
+// * If new.target is undefined, you know the function was not called with new. You can then force a new invocation if that’s necessary.
 
 
 // ** static
-// static members wento .constructor inside protptype object 
+// static members go to inside .constructor inside protptype object 
 
 class Foo {
     static cool() {console.log("cool");}
@@ -508,6 +516,7 @@ class Bar extends Foo {
     }
     neat() {
         super.wow();
+        // super.cool(); // Error
         console.log("neat");
     }
 }
@@ -525,9 +534,9 @@ b.cool;// undefined
 // ** Chapter 4:
 // Callbacks, (Inversion of control, synchronous looking code for async code)
 // promises(Solves trust issue(inversion of control)),
-// Generators (Solce sync looking code of an async code)
+// Generators (Solve sync looking code of an async code)
 // Promise + Generator (Best)
-// async/await
+// async/await newer and cleaner sysntax
 
 // ** Chapter 5:
 // Collections
